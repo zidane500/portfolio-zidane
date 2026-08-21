@@ -1802,3 +1802,309 @@ a {
     animation: none;
   }
 }
+
+/* ======================================================
+   HERO POLISH — PARTICLES
+====================================================== */
+
+.hero-particles {
+  position: absolute;
+  inset: 0;
+
+  overflow: hidden;
+  pointer-events: none;
+
+  z-index: 0;
+}
+
+.hero-particles span {
+  position: absolute;
+
+  width: 3px;
+  height: 3px;
+
+  border-radius: 50%;
+
+  background: rgba(103, 232, 249, 0.8);
+
+  box-shadow:
+    0 0 8px rgba(103, 232, 249, 0.8),
+    0 0 22px rgba(103, 232, 249, 0.25);
+
+  animation: digital-particle 8s ease-in-out infinite;
+}
+
+.hero-particles span:nth-child(1) {
+  top: 16%;
+  left: 54%;
+}
+
+.hero-particles span:nth-child(2) {
+  top: 27%;
+  left: 82%;
+
+  animation-delay: -2s;
+}
+
+.hero-particles span:nth-child(3) {
+  top: 72%;
+  left: 69%;
+
+  background: rgba(167, 139, 250, 0.9);
+
+  animation-delay: -5s;
+}
+
+.hero-particles span:nth-child(4) {
+  top: 18%;
+  left: 91%;
+
+  animation-delay: -1s;
+}
+
+.hero-particles span:nth-child(5) {
+  top: 82%;
+  left: 51%;
+
+  background: rgba(139, 92, 246, 0.85);
+
+  animation-delay: -6s;
+}
+
+.hero-particles span:nth-child(6) {
+  top: 61%;
+  left: 95%;
+
+  animation-delay: -3s;
+}
+
+.hero-particles span:nth-child(7) {
+  top: 10%;
+  left: 66%;
+
+  width: 2px;
+  height: 2px;
+
+  animation-delay: -4s;
+}
+
+.hero-particles span:nth-child(8) {
+  top: 88%;
+  left: 83%;
+
+  width: 2px;
+  height: 2px;
+
+  animation-delay: -7s;
+}
+
+@keyframes digital-particle {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: translateY(0) scale(0.7);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateY(-18px) scale(1);
+  }
+}
+
+/* ======================================================
+   HERO MICRO SIGNATURE
+====================================================== */
+
+.hero-signature {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  margin-top: 18px;
+
+  color: rgba(255, 255, 255, 0.23);
+
+  font-family: "SFMono-Regular", Consolas, monospace;
+
+  font-size: 7px;
+  font-weight: 700;
+
+  letter-spacing: 0.17em;
+}
+
+.hero-signature__separator {
+  width: 20px;
+  height: 1px;
+
+  background: linear-gradient(
+    90deg,
+    rgba(139, 92, 246, 0.65),
+    rgba(34, 211, 238, 0.15)
+  );
+}
+
+/* ======================================================
+   HERO STATS
+====================================================== */
+
+.hero-stats {
+  width: min(100%, 590px);
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  margin-top: 35px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.018),
+    transparent
+  );
+}
+
+.hero-stat {
+  position: relative;
+
+  padding: 16px 13px;
+}
+
+.hero-stat:not(:last-child)::after {
+  content: "";
+
+  position: absolute;
+  right: 0;
+  top: 25%;
+
+  width: 1px;
+  height: 50%;
+
+  background: linear-gradient(
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
+}
+
+.hero-stat strong {
+  display: block;
+
+  color: rgba(255, 255, 255, 0.9);
+
+  font-size: 17px;
+  font-weight: 700;
+
+  letter-spacing: -0.04em;
+}
+
+.hero-stat span {
+  display: block;
+
+  margin-top: 3px;
+
+  color: rgba(255, 255, 255, 0.28);
+
+  font-size: 7px;
+  font-weight: 650;
+
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ======================================================
+   HOLOGRAPHIC PLATFORM ENHANCEMENT
+====================================================== */
+
+.device-platform {
+  overflow: hidden;
+}
+
+.device-platform__core {
+  position: absolute;
+
+  left: 50%;
+  top: 24px;
+
+  width: 58px;
+  height: 8px;
+
+  transform: translateX(-50%);
+
+  border-radius: 50%;
+
+  background: #8b5cf6;
+
+  filter: blur(3px);
+
+  box-shadow:
+    0 0 18px rgba(139, 92, 246, 0.9),
+    0 0 42px rgba(71, 113, 255, 0.65);
+}
+
+.device-reflection {
+  width: 72%;
+  height: 70px;
+
+  margin: -20px auto 0;
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    ellipse,
+    rgba(105, 74, 255, 0.16),
+    rgba(61, 102, 255, 0.045) 42%,
+    transparent 70%
+  );
+
+  filter: blur(14px);
+
+  transform: scaleY(0.45);
+
+  pointer-events: none;
+}
+
+/* ======================================================
+   HERO BOTTOM TRANSITION
+====================================================== */
+
+.hero-section::after {
+  content: "";
+
+  position: absolute;
+
+  left: 5%;
+  right: 5%;
+  bottom: 0;
+
+  height: 1px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(139, 92, 246, 0.15),
+    rgba(34, 211, 238, 0.15),
+    transparent
+  );
+}
+
+/* ======================================================
+   RESPONSIVE POLISH
+====================================================== */
+
+@media (max-width: 620px) {
+  .hero-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero-stat:nth-child(2)::after {
+    display: none;
+  }
+
+  .hero-signature {
+    flex-wrap: wrap;
+  }
+}

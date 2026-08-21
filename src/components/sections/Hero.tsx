@@ -42,6 +42,16 @@ export default function Hero() {
 
   return (
     <section id="home" className="hero-section">
+      <div className="hero-particles" aria-hidden="true">
+        <span />
+        <span />
+        <span />
+        <span />
+        <span />
+        <span />
+        <span />
+        <span />
+      </div>
       {/* LEFT SIDE */}
       <div className="hero-copy">
         <motion.div
@@ -70,6 +80,13 @@ export default function Hero() {
             ZIDANE
             <span>.</span>
           </h1>
+          <div className="hero-signature">
+            <span>FR / TN</span>
+            <span className="hero-signature__separator" />
+            <span>WEB EXPERIENCE</span>
+            <span className="hero-signature__separator" />
+            <span>2026</span>
+          </div>
         </motion.div>
 
         <motion.div
@@ -131,6 +148,35 @@ export default function Hero() {
             delay: 0.42,
           }}
         >
+          <motion.div
+            className="hero-stats"
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.8,
+              delay: 0.5,
+            }}
+          >
+            <div className="hero-stat">
+              <strong>4+</strong>
+              <span>Années</span>
+            </div>
+
+            <div className="hero-stat">
+              <strong>30+</strong>
+              <span>Projets</span>
+            </div>
+
+            <div className="hero-stat">
+              <strong>15+</strong>
+              <span>Clients</span>
+            </div>
+
+            <div className="hero-stat">
+              <strong>10K+</strong>
+              <span>Lignes de code</span>
+            </div>
+          </motion.div>
           <div className="hero-socials">
             <a href="#" aria-label="GitHub">
               <FaGithub size={17} />
@@ -330,7 +376,10 @@ export default function Hero() {
 
           <div className="device-platform">
             <span className="device-platform__light" />
+            <span className="device-platform__core" />
           </div>
+
+          <div className="device-reflection" aria-hidden="true" />
         </motion.div>
 
         <div className="hero-visual__coordinates">
