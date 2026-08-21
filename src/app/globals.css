@@ -3475,3 +3475,689 @@ a {
     margin-top: 20px;
   }
 }
+/* ======================================================
+   ABOUT — REFERENCE DESIGN
+====================================================== */
+
+.about-section {
+  position: relative;
+
+  width: min(calc(100% - 64px), 1456px);
+  min-height: 242px;
+
+  margin: 7px auto 14px;
+
+  display: grid;
+  grid-template-columns:
+    minmax(250px, 0.8fr)
+    minmax(520px, 2fr)
+    minmax(150px, 0.45fr);
+
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.065);
+  border-radius: 14px;
+
+  background: linear-gradient(
+    115deg,
+    rgba(42, 56, 91, 0.09),
+    rgba(10, 15, 26, 0.82) 39%,
+    rgba(8, 13, 24, 0.9)
+  );
+
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.035),
+    0 22px 60px rgba(0, 0, 0, 0.19);
+}
+
+/* ======================================================
+   PORTRAIT
+====================================================== */
+
+.about-portrait {
+  position: relative;
+
+  min-height: 242px;
+
+  overflow: hidden;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  border-right: 1px solid rgba(255, 255, 255, 0.035);
+
+  background: radial-gradient(
+    circle at 47% 58%,
+    rgba(72, 73, 255, 0.13),
+    transparent 37%
+  );
+}
+
+.about-portrait__glow {
+  position: absolute;
+
+  left: 50%;
+  bottom: 25px;
+
+  width: 180px;
+  height: 180px;
+
+  transform: translateX(-50%);
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(77, 64, 255, 0.19),
+    rgba(28, 137, 255, 0.07) 43%,
+    transparent 70%
+  );
+
+  filter: blur(12px);
+}
+
+.about-portrait__orbit {
+  position: absolute;
+
+  border: 1px solid rgba(112, 93, 255, 0.14);
+  border-radius: 50%;
+}
+
+.about-portrait__orbit--1 {
+  width: 205px;
+  height: 83px;
+
+  bottom: 86px;
+
+  transform: rotate(-17deg);
+}
+
+.about-portrait__orbit--2 {
+  width: 160px;
+  height: 135px;
+
+  bottom: 48px;
+
+  transform: rotate(35deg);
+
+  border-color: rgba(65, 197, 255, 0.08);
+}
+
+/*
+  Temporary stylised portrait.
+  Later we'll replace this with Zidane's real photo.
+*/
+
+.about-avatar {
+  position: relative;
+
+  z-index: 3;
+
+  width: 150px;
+  height: 190px;
+}
+
+.about-avatar__halo {
+  position: absolute;
+
+  inset: 25px 20px 20px;
+
+  border: 1px solid rgba(109, 84, 255, 0.12);
+  border-radius: 50%;
+
+  box-shadow: 0 0 35px rgba(93, 75, 255, 0.09);
+}
+
+.about-avatar__head {
+  position: absolute;
+
+  top: 27px;
+  left: 50%;
+
+  width: 59px;
+  height: 67px;
+
+  transform: translateX(-50%);
+
+  border-radius: 48% 48% 43% 43%;
+
+  background: linear-gradient(145deg, #30364a, #161b29);
+
+  box-shadow:
+    inset -9px -6px 17px rgba(0, 0, 0, 0.28),
+    0 0 25px rgba(87, 74, 255, 0.12);
+}
+
+.about-avatar__head::before {
+  content: "";
+
+  position: absolute;
+
+  top: -6px;
+  left: 3px;
+
+  width: 52px;
+  height: 27px;
+
+  border-radius: 70% 60% 30% 28%;
+
+  background: #121722;
+
+  transform: rotate(-4deg);
+}
+
+.about-avatar__body {
+  position: absolute;
+
+  left: 50%;
+  bottom: -14px;
+
+  width: 145px;
+  height: 118px;
+
+  transform: translateX(-50%);
+
+  overflow: hidden;
+
+  border-radius: 58px 58px 8px 8px;
+
+  background: linear-gradient(150deg, #202738, #0c111d 69%);
+
+  box-shadow: 0 -8px 31px rgba(80, 69, 255, 0.08);
+}
+
+.about-avatar__body::before {
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+  top: -21px;
+
+  width: 49px;
+  height: 41px;
+
+  transform: translateX(-50%);
+
+  border-radius: 50%;
+
+  background: #191f2d;
+}
+
+.about-avatar__signature {
+  position: absolute;
+
+  right: 14px;
+  bottom: 25px;
+
+  color: rgba(255, 255, 255, 0.25);
+
+  font-family: cursive;
+
+  font-size: 17px;
+
+  transform: rotate(-8deg);
+}
+
+.about-location {
+  position: absolute;
+
+  z-index: 6;
+
+  left: 16px;
+  bottom: 14px;
+
+  min-height: 27px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 5px;
+
+  padding: 0 8px;
+
+  border: 1px solid rgba(123, 101, 255, 0.17);
+  border-radius: 8px;
+
+  background: rgba(25, 24, 61, 0.73);
+
+  color: rgba(154, 145, 255, 0.7);
+
+  font-size: 6px;
+
+  backdrop-filter: blur(12px);
+}
+
+/* ======================================================
+   ABOUT CONTENT
+====================================================== */
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 27px 28px;
+}
+
+.about-heading {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  margin-bottom: 12px;
+}
+
+.about-heading__dot {
+  width: 7px;
+  height: 7px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #7658ff;
+
+  box-shadow: 0 0 10px rgba(118, 88, 255, 0.75);
+}
+
+.about-heading h2 {
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.9);
+
+  font-size: 16px;
+  font-weight: 650;
+
+  letter-spacing: -0.025em;
+}
+
+.about-intro,
+.about-text {
+  max-width: 710px;
+
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.46);
+
+  font-size: 9px;
+  line-height: 1.58;
+}
+
+.about-text {
+  margin-top: 4px;
+
+  color: rgba(255, 255, 255, 0.34);
+}
+
+/* ======================================================
+   FEATURE CHIPS
+====================================================== */
+
+.about-chips {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 8px;
+
+  margin-top: 17px;
+}
+
+.about-chip {
+  min-height: 36px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 6px 8px;
+
+  border: 1px solid rgba(255, 255, 255, 0.045);
+  border-radius: 8px;
+
+  background: rgba(255, 255, 255, 0.018);
+}
+
+.about-chip__icon {
+  width: 24px;
+  height: 24px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 7px;
+
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.about-chip__copy {
+  min-width: 0;
+}
+
+.about-chip strong,
+.about-chip small {
+  display: block;
+}
+
+.about-chip strong {
+  overflow: hidden;
+
+  color: rgba(255, 255, 255, 0.63);
+
+  font-size: 6px;
+  font-weight: 580;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.about-chip small {
+  margin-top: 2px;
+
+  color: rgba(255, 255, 255, 0.26);
+
+  font-size: 5px;
+
+  white-space: nowrap;
+}
+
+.about-chip--blue .about-chip__icon {
+  color: #5ca8ff;
+
+  background: rgba(53, 102, 255, 0.08);
+}
+
+.about-chip--green .about-chip__icon {
+  color: #54de9b;
+
+  background: rgba(54, 197, 123, 0.07);
+}
+
+.about-chip--orange .about-chip__icon {
+  color: #ffad53;
+
+  background: rgba(255, 152, 55, 0.07);
+}
+
+.about-chip--purple .about-chip__icon,
+.about-chip--violet .about-chip__icon {
+  color: #aa70ff;
+
+  background: rgba(136, 75, 255, 0.08);
+}
+
+/* ======================================================
+   ABOUT STATUS PANEL
+====================================================== */
+
+.about-status {
+  position: relative;
+
+  align-self: center;
+
+  width: calc(100% - 24px);
+  min-height: 185px;
+
+  margin-right: 12px;
+
+  padding: 17px 15px;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.055);
+  border-radius: 11px;
+
+  background: linear-gradient(
+    145deg,
+    rgba(23, 31, 53, 0.66),
+    rgba(10, 15, 26, 0.74)
+  );
+}
+
+.about-status::before {
+  content: "";
+
+  position: absolute;
+
+  right: -38px;
+  bottom: -42px;
+
+  width: 100px;
+  height: 100px;
+
+  border-radius: 50%;
+
+  background: rgba(105, 76, 255, 0.11);
+
+  filter: blur(25px);
+}
+
+.about-status__section {
+  position: relative;
+  z-index: 2;
+}
+
+.about-status__label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: rgba(255, 255, 255, 0.3);
+
+  font-size: 6px;
+}
+
+.about-status__time {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: #63baff;
+
+  font-size: 15px;
+  font-weight: 720;
+}
+
+.about-status__fast {
+  color: #52dc99;
+
+  font-size: 6px;
+}
+
+.about-status__divider {
+  height: 1px;
+
+  margin: 15px 0;
+
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.07), transparent);
+}
+
+.about-collaborators {
+  display: flex;
+  align-items: center;
+
+  margin-top: 10px;
+}
+
+.about-collaborators span,
+.about-collaborators strong {
+  width: 27px;
+  height: 27px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-left: -5px;
+
+  border: 2px solid #0c111d;
+  border-radius: 50%;
+
+  background: linear-gradient(145deg, #28344e, #151a29);
+
+  color: rgba(255, 255, 255, 0.68);
+
+  font-size: 6px;
+  font-weight: 600;
+}
+
+.about-collaborators span:first-child {
+  margin-left: 0;
+}
+
+.about-collaborators strong {
+  background: linear-gradient(145deg, #43318f, #1e2042);
+
+  color: #b6a8ff;
+}
+
+.about-status__spark {
+  position: absolute;
+
+  right: 10px;
+  top: 10px;
+
+  color: rgba(119, 94, 255, 0.25);
+}
+
+/* ======================================================
+   ABOUT RESPONSIVE
+====================================================== */
+
+@media (max-width: 1180px) {
+  .about-section {
+    grid-template-columns:
+      minmax(220px, 0.75fr)
+      minmax(420px, 1.6fr);
+  }
+
+  .about-status {
+    display: none;
+  }
+}
+
+@media (max-width: 850px) {
+  .about-section {
+    width: calc(100% - 24px);
+
+    grid-template-columns: 1fr;
+  }
+
+  .about-portrait {
+    min-height: 250px;
+
+    border-right: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  }
+
+  .about-content {
+    padding: 25px 20px;
+  }
+}
+
+@media (max-width: 620px) {
+  .about-chips {
+    grid-template-columns: 1fr;
+  }
+
+  .about-chip {
+    min-height: 44px;
+  }
+
+  .about-chip strong {
+    font-size: 7px;
+  }
+
+  .about-chip small {
+    font-size: 6px;
+  }
+}
+/* ======================================================
+   ABOUT — FINAL REFERENCE TUNING
+====================================================== */
+
+.about-section {
+  min-height: 226px;
+  grid-template-columns:
+    minmax(270px, 0.82fr)
+    minmax(560px, 2fr)
+    178px;
+}
+
+.about-portrait {
+  min-height: 226px;
+
+  background:
+    radial-gradient(
+      circle at 48% 55%,
+      rgba(74, 62, 255, 0.17),
+      transparent 34%
+    ),
+    linear-gradient(135deg, rgba(9, 25, 44, 0.64), rgba(9, 12, 22, 0.12));
+}
+
+.about-content {
+  padding: 24px 30px;
+}
+
+.about-heading {
+  margin-bottom: 10px;
+}
+
+.about-heading h2 {
+  font-size: 15px;
+}
+
+.about-chips {
+  margin-top: 15px;
+  gap: 7px 9px;
+}
+
+.about-chip {
+  min-height: 34px;
+}
+
+.about-status {
+  width: calc(100% - 22px);
+  min-height: 174px;
+
+  margin-right: 11px;
+
+  padding: 15px 14px;
+}
+
+.about-status__time {
+  font-size: 14px;
+}
+
+/* stronger portrait lighting */
+
+.about-avatar {
+  transform: scale(1.06);
+  transform-origin: bottom center;
+}
+
+.about-avatar__head {
+  background: linear-gradient(145deg, #343c56, #171c2b 62%);
+
+  box-shadow:
+    -18px 4px 40px rgba(53, 111, 255, 0.1),
+    18px -6px 38px rgba(117, 74, 255, 0.14),
+    inset -9px -6px 17px rgba(0, 0, 0, 0.28);
+}
+
+.about-avatar__body {
+  background:
+    radial-gradient(
+      circle at 55% 20%,
+      rgba(73, 73, 140, 0.28),
+      transparent 35%
+    ),
+    linear-gradient(150deg, #222b40, #0b101c 70%);
+}

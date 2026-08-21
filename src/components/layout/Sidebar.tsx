@@ -17,7 +17,7 @@ import {
   FaLinkedinIn,
   FaXTwitter,
 } from "react-icons/fa6";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const navigation = [
   {
@@ -59,6 +59,37 @@ const navigation = [
 
 export default function Sidebar() {
   const [activeItem, setActiveItem] = useState("home");
+
+  useEffect(() => {
+    const sectionIds = navigation.map((item) => item.id);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntries = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+        if (visibleEntries.length > 0) {
+          setActiveItem(visibleEntries[0].target.id);
+        }
+      },
+      {
+        root: null,
+        rootMargin: "-25% 0px -55% 0px",
+        threshold: [0.1, 0.25, 0.5, 0.75],
+      },
+    );
+
+    sectionIds.forEach((id) => {
+      const section = document.getElementById(id);
+
+      if (section) {
+        observer.observe(section);
+      }
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <motion.aside

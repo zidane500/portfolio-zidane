@@ -1,4 +1,5 @@
 import Sidebar from "@/components/layout/Sidebar";
+import About from "@/components/sections/About";
 import Hero from "@/components/sections/Hero";
 
 export default function Home() {
@@ -12,6 +13,7 @@ export default function Home() {
 
       <div className="ref-main">
         <Hero />
+        <About />
       </div>
     </main>
   );
