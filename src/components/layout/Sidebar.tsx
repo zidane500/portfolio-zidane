@@ -4,48 +4,55 @@ import { motion } from "framer-motion";
 import {
   BriefcaseBusiness,
   Code2,
-  FolderKanban,
+  Download,
   Home,
   Mail,
+  MessageSquareQuote,
+  PanelsTopLeft,
   UserRound,
 } from "lucide-react";
+import {
+  FaGithub,
+  FaInstagram,
+  FaLinkedinIn,
+  FaXTwitter,
+} from "react-icons/fa6";
 import { useState } from "react";
 
 const navigation = [
   {
     id: "home",
     label: "Accueil",
-    number: "01",
     icon: Home,
   },
   {
     id: "about",
     label: "À propos",
-    number: "02",
     icon: UserRound,
   },
   {
     id: "skills",
     label: "Compétences",
-    number: "03",
     icon: Code2,
   },
   {
     id: "projects",
     label: "Projets",
-    number: "04",
-    icon: FolderKanban,
+    icon: PanelsTopLeft,
   },
   {
     id: "experience",
     label: "Expérience",
-    number: "05",
     icon: BriefcaseBusiness,
+  },
+  {
+    id: "testimonials",
+    label: "Témoignages",
+    icon: MessageSquareQuote,
   },
   {
     id: "contact",
     label: "Contact",
-    number: "06",
     icon: Mail,
   },
 ];
@@ -55,88 +62,99 @@ export default function Sidebar() {
 
   return (
     <motion.aside
-      className="sidebar"
-      initial={{ opacity: 0, x: -28 }}
+      className="ref-sidebar"
+      initial={{ opacity: 0, x: -24 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{
-        duration: 0.75,
+        duration: 0.7,
         ease: [0.16, 1, 0.3, 1],
       }}
     >
-      <div className="sidebar__inner">
-        {/* Logo */}
+      <div className="ref-sidebar__inner">
         <a
           href="#home"
-          className="sidebar-logo"
-          aria-label="Retour à l'accueil"
+          className="ref-logo"
+          aria-label="Accueil"
           onClick={() => setActiveItem("home")}
         >
-          <span className="sidebar-logo__glow" aria-hidden="true" />
-
-          <span className="sidebar-logo__text">
+          <span className="ref-logo__glow" />
+          <span className="ref-logo__mark">
             Z<span>/</span>
           </span>
         </a>
 
-        {/* Navigation */}
-        <nav className="sidebar-nav" aria-label="Navigation principale">
-          <span className="sidebar-nav__rail" aria-hidden="true" />
-
+        <nav className="ref-nav" aria-label="Navigation principale">
           {navigation.map((item) => {
             const Icon = item.icon;
-            const isActive = activeItem === item.id;
+            const active = activeItem === item.id;
 
             return (
               <a
                 key={item.id}
                 href={`#${item.id}`}
-                className={`sidebar-link ${
-                  isActive ? "sidebar-link--active" : ""
+                className={`ref-nav__item ${
+                  active ? "ref-nav__item--active" : ""
                 }`}
                 onClick={() => setActiveItem(item.id)}
-                aria-label={item.label}
               >
-                {isActive && (
+                {active && (
                   <motion.span
-                    layoutId="sidebar-active-background"
-                    className="sidebar-link__active-bg"
+                    layoutId="ref-nav-active"
+                    className="ref-nav__active"
                     transition={{
                       type: "spring",
-                      stiffness: 420,
+                      stiffness: 430,
                       damping: 34,
                     }}
                   />
                 )}
 
-                <span className="sidebar-link__number">{item.number}</span>
+                <Icon className="ref-nav__icon" size={16} strokeWidth={1.7} />
 
-                <span className="sidebar-link__icon">
-                  <Icon size={18} strokeWidth={1.7} />
-                </span>
+                <span className="ref-nav__label">{item.label}</span>
 
-                <span className="sidebar-link__label">{item.label}</span>
-
-                {isActive && (
-                  <motion.span
-                    layoutId="sidebar-active-dot"
-                    className="sidebar-link__dot"
-                  />
+                {active && (
+                  <span className="ref-nav__indicator" aria-hidden="true" />
                 )}
               </a>
             );
           })}
         </nav>
 
-        {/* Status */}
-        <div className="sidebar-status">
-          <span className="sidebar-status__indicator">
-            <span className="sidebar-status__pulse" />
-          </span>
+        <div className="ref-sidebar__bottom">
+          <div className="ref-availability">
+            <span className="ref-availability__dot">
+              <span />
+            </span>
 
-          <div className="sidebar-status__content">
-            <span>Disponible</span>
-            <strong>Freelance</strong>
+            <div>
+              <small>Disponible pour</small>
+              <strong>Nouvelles opportunités</strong>
+            </div>
           </div>
+
+          <div className="ref-socials">
+            <a href="#" aria-label="GitHub">
+              <FaGithub />
+            </a>
+
+            <a href="#" aria-label="LinkedIn">
+              <FaLinkedinIn />
+            </a>
+
+            <a href="#" aria-label="X">
+              <FaXTwitter />
+            </a>
+
+            <a href="#" aria-label="Instagram">
+              <FaInstagram />
+            </a>
+          </div>
+
+          <a href="#" className="ref-cv">
+            <Download size={13} />
+            Télécharger CV
+          </a>
         </div>
       </div>
     </motion.aside>

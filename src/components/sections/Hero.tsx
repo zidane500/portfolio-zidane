@@ -2,9 +2,25 @@
 
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 
-import { ArrowDownRight, ArrowUpRight, Download, Sparkles } from "lucide-react";
+import {
+  ArrowRight,
+  Award,
+  Code2,
+  MapPin,
+  Moon,
+  Package,
+  Send,
+  Sun,
+  Users,
+  Zap,
+} from "lucide-react";
 
-import { FaGithub, FaLinkedinIn } from "react-icons/fa6";
+import {
+  SiNextdotjs,
+  SiReact,
+  SiTailwindcss,
+  SiTypescript,
+} from "react-icons/si";
 
 import type { MouseEvent } from "react";
 
@@ -13,397 +29,400 @@ export default function Hero() {
   const mouseY = useMotionValue(0);
 
   const smoothX = useSpring(mouseX, {
-    stiffness: 100,
-    damping: 20,
+    stiffness: 110,
+    damping: 22,
   });
 
   const smoothY = useSpring(mouseY, {
-    stiffness: 100,
-    damping: 20,
+    stiffness: 110,
+    damping: 22,
   });
 
-  const rotateY = useTransform(smoothX, [-0.5, 0.5], [-7, 7]);
-  const rotateX = useTransform(smoothY, [-0.5, 0.5], [6, -6]);
+  const rotateY = useTransform(smoothX, [-0.5, 0.5], [-6, 6]);
+
+  const rotateX = useTransform(smoothY, [-0.5, 0.5], [5, -5]);
 
   function handleMouseMove(event: MouseEvent<HTMLDivElement>) {
     const rect = event.currentTarget.getBoundingClientRect();
 
     const x = (event.clientX - rect.left) / rect.width - 0.5;
+
     const y = (event.clientY - rect.top) / rect.height - 0.5;
 
     mouseX.set(x);
     mouseY.set(y);
   }
 
-  function handleMouseLeave() {
+  function resetMouse() {
     mouseX.set(0);
     mouseY.set(0);
   }
 
   return (
-    <section id="home" className="hero-section">
-      <div className="hero-particles" aria-hidden="true">
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-      </div>
-      {/* LEFT SIDE */}
-      <div className="hero-copy">
-        <motion.div
-          className="hero-availability"
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.65 }}
-        >
-          <span className="hero-availability__pulse" />
-          Disponible pour de nouveaux projets
-          <Sparkles size={13} />
-        </motion.div>
+    <section id="home" className="ref-hero">
+      {/* TOP CONTROLS */}
 
+      <div className="ref-hero__top">
+        <div />
+
+        <div className="ref-top-controls">
+          <div className="ref-location">
+            <MapPin size={11} />
+            Paris, France
+          </div>
+
+          <div className="ref-online">
+            <span />
+            Disponible
+          </div>
+
+          <button
+            className="ref-theme"
+            type="button"
+            aria-label="Changer le thème"
+          >
+            <Sun size={11} />
+
+            <span className="ref-theme__track">
+              <span />
+            </span>
+
+            <Moon size={11} />
+          </button>
+        </div>
+      </div>
+
+      {/* HERO MAIN */}
+
+      <div className="ref-hero__main">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
+          className="ref-hero__copy"
+          initial={{
+            opacity: 0,
+            y: 18,
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+          }}
           transition={{
             duration: 0.75,
-            delay: 0.08,
             ease: [0.16, 1, 0.3, 1],
           }}
         >
-          <span className="hero-kicker">Salut, je suis</span>
+          <div className="ref-dev-badge">
+            <Code2 size={12} />
+            Développeur Full Stack & Créatif Numérique
+          </div>
 
-          <h1 className="hero-name">
-            ZIDANE
-            <span>.</span>
+          <h1 className="ref-title">
+            <span className="ref-title__hello">Salut, je suis</span>
+
+            <span className="ref-title__name">Zidane.</span>
           </h1>
-          <div className="hero-signature">
-            <span>FR / TN</span>
-            <span className="hero-signature__separator" />
-            <span>WEB EXPERIENCE</span>
-            <span className="hero-signature__separator" />
-            <span>2026</span>
+
+          <h2 className="ref-role">
+            Développeur Full Stack & Créatif Numérique
+          </h2>
+
+          <p className="ref-description">
+            Je conçois des expériences digitales rapides, élégantes et centrées
+            utilisateur.
+          </p>
+
+          <p className="ref-description ref-description--small">
+            Développeur Full Stack passionné par le code propre, les interfaces
+            futuristes et les idées qui font la différence.
+          </p>
+
+          <div className="ref-actions">
+            <a href="#projects" className="ref-button ref-button--primary">
+              Voir mes projets
+              <ArrowRight size={15} />
+            </a>
+
+            <a href="#contact" className="ref-button ref-button--secondary">
+              Me contacter
+              <Send size={14} />
+            </a>
+          </div>
+
+          <div className="ref-scroll-hint">
+            <span className="ref-scroll-hint__mouse">
+              <span />
+            </span>
+
+            <span>Scroll pour explorer</span>
+
+            <span className="ref-scroll-hint__line" />
           </div>
         </motion.div>
 
-        <motion.div
-          className="hero-role"
-          initial={{ opacity: 0, y: 22 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 0.75,
-            delay: 0.15,
-          }}
-        >
-          <span>Creative</span>
-
-          <span className="hero-role__divider" />
-
-          <strong>Full-Stack Developer</strong>
-        </motion.div>
-
-        <motion.p
-          className="hero-description"
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 0.7,
-            delay: 0.22,
-          }}
-        >
-          Je transforme des idées en expériences digitales modernes, rapides et
-          mémorables — à l&apos;intersection du code, du design et de
-          l&apos;innovation.
-        </motion.p>
+        {/* RIGHT HOLOGRAM */}
 
         <motion.div
-          className="hero-actions"
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
+          className="ref-hologram"
+          onMouseMove={handleMouseMove}
+          onMouseLeave={resetMouse}
+          initial={{
+            opacity: 0,
+            scale: 0.94,
+          }}
+          animate={{
+            opacity: 1,
+            scale: 1,
+          }}
           transition={{
-            duration: 0.7,
-            delay: 0.3,
+            duration: 0.9,
+            delay: 0.1,
+            ease: [0.16, 1, 0.3, 1],
           }}
         >
-          <a href="#projects" className="hero-button hero-button--primary">
-            Explorer mes projets
-            <ArrowUpRight size={17} />
-          </a>
+          <div className="ref-hologram__glow" />
+          <div className="ref-hologram__grid" />
 
-          <a href="#contact" className="hero-button hero-button--secondary">
-            Me contacter
-            <ArrowDownRight size={17} />
-          </a>
-        </motion.div>
+          <div className="ref-orbit ref-orbit--1" />
+          <div className="ref-orbit ref-orbit--2" />
+          <div className="ref-orbit ref-orbit--3" />
 
-        <motion.div
-          className="hero-meta"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{
-            duration: 0.8,
-            delay: 0.42,
-          }}
-        >
           <motion.div
-            className="hero-stats"
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
+            className="ref-tech ref-tech--react"
+            animate={{
+              y: [0, -9, 0],
+            }}
             transition={{
-              duration: 0.8,
-              delay: 0.5,
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut",
             }}
           >
-            <div className="hero-stat">
-              <strong>4+</strong>
-              <span>Années</span>
-            </div>
-
-            <div className="hero-stat">
-              <strong>30+</strong>
-              <span>Projets</span>
-            </div>
-
-            <div className="hero-stat">
-              <strong>15+</strong>
-              <span>Clients</span>
-            </div>
-
-            <div className="hero-stat">
-              <strong>10K+</strong>
-              <span>Lignes de code</span>
-            </div>
+            <SiReact />
           </motion.div>
-          <div className="hero-socials">
-            <a href="#" aria-label="GitHub">
-              <FaGithub size={17} />
-            </a>
 
-            <a href="#" aria-label="LinkedIn">
-              <FaLinkedinIn size={17} />
-            </a>
-          </div>
+          <motion.div
+            className="ref-tech ref-tech--next"
+            animate={{
+              x: [0, -6, 0],
+              y: [0, 6, 0],
+            }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            <SiNextdotjs />
+          </motion.div>
 
-          <span className="hero-meta__line" />
+          <motion.div
+            className="ref-tech ref-tech--ts"
+            animate={{
+              y: [0, 10, 0],
+            }}
+            transition={{
+              duration: 4.8,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            <SiTypescript />
+          </motion.div>
 
-          <button type="button" className="hero-download">
-            <Download size={15} />
-            Télécharger CV
-          </button>
+          <motion.div
+            className="ref-tech ref-tech--tailwind"
+            animate={{
+              x: [0, 7, 0],
+              y: [0, -5, 0],
+            }}
+            transition={{
+              duration: 5.3,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            <SiTailwindcss />
+          </motion.div>
+
+          <motion.div
+            className="ref-device"
+            style={{
+              rotateX,
+              rotateY,
+            }}
+          >
+            <div className="ref-device__screen">
+              <div className="ref-device__topbar">
+                <div className="ref-device__dots">
+                  <span />
+                  <span />
+                  <span />
+                </div>
+
+                <span>index.tsx</span>
+              </div>
+
+              <div className="ref-code">
+                <div>
+                  <span className="ref-line">01</span>
+                  <code>
+                    <b>const</b> <i>developer</i> = {"{"}
+                  </code>
+                </div>
+
+                <div>
+                  <span className="ref-line">02</span>
+                  <code>
+                    &nbsp;&nbsp;name: <em>&quot;Zidane&quot;</em>,
+                  </code>
+                </div>
+
+                <div>
+                  <span className="ref-line">03</span>
+                  <code>
+                    &nbsp;&nbsp;role: <em>&quot;Full Stack Developer&quot;</em>,
+                  </code>
+                </div>
+
+                <div>
+                  <span className="ref-line">04</span>
+                  <code>&nbsp;&nbsp;stack: [</code>
+                </div>
+
+                <div>
+                  <span className="ref-line">05</span>
+                  <code>
+                    &nbsp;&nbsp;&nbsp;
+                    <em>&quot;React&quot;</em>,
+                  </code>
+                </div>
+
+                <div>
+                  <span className="ref-line">06</span>
+                  <code>
+                    &nbsp;&nbsp;&nbsp;
+                    <em>&quot;Next.js&quot;</em>,
+                  </code>
+                </div>
+
+                <div>
+                  <span className="ref-line">07</span>
+                  <code>
+                    &nbsp;&nbsp;&nbsp;
+                    <em>&quot;TypeScript&quot;</em>,
+                  </code>
+                </div>
+
+                <div>
+                  <span className="ref-line">08</span>
+                  <code>&nbsp;&nbsp;],</code>
+                </div>
+
+                <div>
+                  <span className="ref-line">09</span>
+                  <code>
+                    &nbsp;&nbsp;focus:{" "}
+                    <em>&quot;Créer des produits qui comptent&quot;</em>
+                  </code>
+                </div>
+
+                <div>
+                  <span className="ref-line">10</span>
+                  <code>{"};"}</code>
+                </div>
+              </div>
+            </div>
+
+            <div className="ref-device__base">
+              <span />
+              <span />
+              <span />
+            </div>
+
+            <div className="ref-device__energy" />
+          </motion.div>
         </motion.div>
       </div>
 
-      {/* RIGHT SIDE */}
+      {/* STAT CARDS */}
+
       <motion.div
-        className="hero-visual"
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        initial={{ opacity: 0, scale: 0.94 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{
-          duration: 1,
-          delay: 0.16,
-          ease: [0.16, 1, 0.3, 1],
+        className="ref-stats"
+        initial={{
+          opacity: 0,
+          y: 18,
         }}
-      >
-        <div className="hero-visual__light" />
-
-        <div className="hero-orbit hero-orbit--one" aria-hidden="true" />
-
-        <div className="hero-orbit hero-orbit--two" aria-hidden="true" />
-
-        <div className="hero-orbit hero-orbit--three" aria-hidden="true" />
-
-        {/* Floating Technologies */}
-
-        <motion.div
-          className="tech-float tech-float--react"
-          animate={{
-            y: [0, -10, 0],
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        >
-          <span>⚛</span>
-          React
-        </motion.div>
-
-        <motion.div
-          className="tech-float tech-float--ts"
-          animate={{
-            y: [0, 12, 0],
-          }}
-          transition={{
-            duration: 5,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        >
-          <strong>TS</strong>
-        </motion.div>
-
-        <motion.div
-          className="tech-float tech-float--next"
-          animate={{
-            x: [0, 8, 0],
-            y: [0, -5, 0],
-          }}
-          transition={{
-            duration: 5.5,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        >
-          N
-        </motion.div>
-
-        {/* Holographic device */}
-
-        <motion.div
-          className="code-device"
-          style={{
-            rotateX,
-            rotateY,
-          }}
-        >
-          <div className="code-device__screen">
-            <div className="code-header">
-              <div className="code-header__dots">
-                <span />
-                <span />
-                <span />
-              </div>
-
-              <span className="code-header__file">portfolio.tsx</span>
-
-              <span className="code-header__status">● LIVE</span>
-            </div>
-
-            <div className="code-content">
-              <div className="code-line">
-                <span className="line-number">01</span>
-
-                <code>
-                  <span className="code-purple">const</span>{" "}
-                  <span className="code-blue">developer</span> = {"{"}
-                </code>
-              </div>
-
-              <div className="code-line">
-                <span className="line-number">02</span>
-
-                <code>
-                  &nbsp;&nbsp;name:{" "}
-                  <span className="code-green">&quot;Zidane&quot;</span>,
-                </code>
-              </div>
-
-              <div className="code-line">
-                <span className="line-number">03</span>
-
-                <code>
-                  &nbsp;&nbsp;role:{" "}
-                  <span className="code-green">
-                    &quot;Full-Stack Developer&quot;
-                  </span>
-                  ,
-                </code>
-              </div>
-
-              <div className="code-line">
-                <span className="line-number">04</span>
-
-                <code>&nbsp;&nbsp;stack: [</code>
-              </div>
-
-              <div className="code-line">
-                <span className="line-number">05</span>
-
-                <code>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <span className="code-green">&quot;Next.js&quot;</span>,
-                </code>
-              </div>
-
-              <div className="code-line">
-                <span className="line-number">06</span>
-
-                <code>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <span className="code-green">&quot;TypeScript&quot;</span>,
-                </code>
-              </div>
-
-              <div className="code-line">
-                <span className="line-number">07</span>
-
-                <code>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <span className="code-green">&quot;React&quot;</span>
-                </code>
-              </div>
-
-              <div className="code-line">
-                <span className="line-number">08</span>
-
-                <code>&nbsp;&nbsp;],</code>
-              </div>
-
-              <div className="code-line">
-                <span className="line-number">09</span>
-
-                <code>
-                  &nbsp;&nbsp;mission:{" "}
-                  <span className="code-green">
-                    &quot;build the future&quot;
-                  </span>
-                </code>
-              </div>
-
-              <div className="code-line">
-                <span className="line-number">10</span>
-
-                <code>{"};"}</code>
-              </div>
-            </div>
-          </div>
-
-          <div className="device-platform">
-            <span className="device-platform__light" />
-            <span className="device-platform__core" />
-          </div>
-
-          <div className="device-reflection" aria-hidden="true" />
-        </motion.div>
-
-        <div className="hero-visual__coordinates">
-          <span>48.8566° N</span>
-          <span>02.3522° E</span>
-        </div>
-      </motion.div>
-
-      {/* bottom hint */}
-
-      <motion.div
-        className="hero-scroll"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        animate={{
+          opacity: 1,
+          y: 0,
+        }}
         transition={{
-          delay: 1,
           duration: 0.7,
+          delay: 0.4,
         }}
       >
-        <span>Scroll to explore</span>
+        <div className="ref-stat ref-stat--blue">
+          <div className="ref-stat__icon">
+            <Zap size={18} />
+          </div>
 
-        <div className="hero-scroll__line" />
+          <div>
+            <strong>4+</strong>
+            <span>Années d&apos;expérience</span>
+          </div>
+        </div>
 
-        <ArrowDownRight size={15} />
+        <div className="ref-stat ref-stat--purple">
+          <div className="ref-stat__icon">
+            <Package size={18} />
+          </div>
+
+          <div>
+            <strong>30+</strong>
+            <span>Projets livrés</span>
+          </div>
+        </div>
+
+        <div className="ref-stat ref-stat--green">
+          <div className="ref-stat__icon">
+            <Users size={18} />
+          </div>
+
+          <div>
+            <strong>15+</strong>
+            <span>Clients satisfaits</span>
+          </div>
+        </div>
+
+        <div className="ref-stat ref-stat--orange">
+          <div className="ref-stat__icon">
+            <Award size={18} />
+          </div>
+
+          <div>
+            <strong>99%</strong>
+            <span>Satisfaction</span>
+          </div>
+        </div>
+
+        <div className="ref-stat ref-stat--orange">
+          <div className="ref-stat__icon">
+            <Code2 size={18} />
+          </div>
+
+          <div>
+            <strong>10k+</strong>
+            <span>Lignes de code</span>
+          </div>
+        </div>
+
+        <div className="ref-stat ref-stat--cyan">
+          <div className="ref-stat__icon ref-stat__infinity">∞</div>
+
+          <div>
+            <strong>∞</strong>
+            <span>Passion & Curiosité</span>
+          </div>
+        </div>
       </motion.div>
     </section>
   );
