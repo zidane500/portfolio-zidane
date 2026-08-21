@@ -63,32 +63,52 @@ export default function Sidebar() {
   useEffect(() => {
     const sectionIds = navigation.map((item) => item.id);
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleEntries = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+    const updateActiveSection = () => {
+      const referencePoint = window.innerHeight * 0.42;
 
-        if (visibleEntries.length > 0) {
-          setActiveItem(visibleEntries[0].target.id);
+      let currentSection = "home";
+      let smallestDistance = Number.POSITIVE_INFINITY;
+
+      sectionIds.forEach((id) => {
+        const section = document.getElementById(id);
+
+        if (!section) return;
+
+        const rect = section.getBoundingClientRect();
+
+        const isAroundReferencePoint =
+          rect.top <= referencePoint && rect.bottom >= referencePoint;
+
+        if (isAroundReferencePoint) {
+          currentSection = id;
+          smallestDistance = 0;
+          return;
         }
-      },
-      {
-        root: null,
-        rootMargin: "-25% 0px -55% 0px",
-        threshold: [0.1, 0.25, 0.5, 0.75],
-      },
-    );
 
-    sectionIds.forEach((id) => {
-      const section = document.getElementById(id);
+        const distance = Math.abs(rect.top - referencePoint);
 
-      if (section) {
-        observer.observe(section);
-      }
+        if (distance < smallestDistance) {
+          smallestDistance = distance;
+          currentSection = id;
+        }
+      });
+
+      setActiveItem(currentSection);
+    };
+
+    updateActiveSection();
+
+    window.addEventListener("scroll", updateActiveSection, {
+      passive: true,
     });
 
-    return () => observer.disconnect();
+    window.addEventListener("resize", updateActiveSection);
+
+    return () => {
+      window.removeEventListener("scroll", updateActiveSection);
+
+      window.removeEventListener("resize", updateActiveSection);
+    };
   }, []);
 
   return (
