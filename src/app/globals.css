@@ -4161,3 +4161,763 @@ a {
     ),
     linear-gradient(150deg, #222b40, #0b101c 70%);
 }
+/* ======================================================
+   SKILLS & STACK — REFERENCE DESIGN
+====================================================== */
+
+.skills-section {
+  position: relative;
+
+  width: min(calc(100% - 64px), 1456px);
+
+  margin: 0 auto 14px;
+
+  padding: 17px 18px 18px;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(16, 22, 36, 0.84),
+    rgba(7, 12, 22, 0.88)
+  );
+
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.035),
+    0 20px 55px rgba(0, 0, 0, 0.17);
+}
+
+/* Heading */
+
+.skills-heading {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  margin-bottom: 13px;
+}
+
+.skills-heading__dot {
+  width: 7px;
+  height: 7px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #7457ff;
+
+  box-shadow: 0 0 9px rgba(116, 87, 255, 0.72);
+}
+
+.skills-heading h2 {
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.88);
+
+  font-size: 14px;
+  font-weight: 620;
+
+  letter-spacing: -0.025em;
+}
+
+/* ======================================================
+   SKILLS GRID
+====================================================== */
+
+.skills-grid {
+  display: grid;
+
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+
+  gap: 10px;
+}
+
+/* ======================================================
+   INDIVIDUAL CARD
+====================================================== */
+
+.skills-card {
+  position: relative;
+
+  min-height: 106px;
+
+  padding: 12px;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.055);
+  border-radius: 10px;
+
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.027),
+    rgba(255, 255, 255, 0.009)
+  );
+
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    background 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.skills-card:hover {
+  transform: translateY(-3px);
+
+  border-color: rgba(255, 255, 255, 0.09);
+
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.04),
+    rgba(255, 255, 255, 0.012)
+  );
+}
+
+.skills-card::before {
+  content: "";
+
+  position: absolute;
+
+  width: 100px;
+  height: 100px;
+
+  top: -66px;
+  right: -55px;
+
+  border-radius: 50%;
+
+  opacity: 0.18;
+
+  filter: blur(30px);
+
+  pointer-events: none;
+}
+
+/* ======================================================
+   CARD HEADER
+====================================================== */
+
+.skills-card__header {
+  position: relative;
+
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  margin-bottom: 12px;
+}
+
+.skills-card__icon {
+  width: 27px;
+  height: 27px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border: 1px solid currentColor;
+  border-radius: 8px;
+
+  background: rgba(255, 255, 255, 0.018);
+}
+
+.skills-card__header h3 {
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.75);
+
+  font-size: 8px;
+  font-weight: 600;
+}
+
+/* ======================================================
+   TECHNOLOGY TAGS
+====================================================== */
+
+.skills-card__tags {
+  position: relative;
+
+  z-index: 2;
+
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 5px;
+}
+
+.skills-tag {
+  min-height: 19px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 7px;
+
+  border: 1px solid rgba(255, 255, 255, 0.045);
+  border-radius: 6px;
+
+  background: rgba(255, 255, 255, 0.025);
+
+  color: rgba(255, 255, 255, 0.41);
+
+  font-size: 5.5px;
+  font-weight: 520;
+
+  white-space: nowrap;
+
+  transition:
+    color 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease;
+}
+
+.skills-tag:hover {
+  color: rgba(255, 255, 255, 0.78);
+
+  border-color: rgba(255, 255, 255, 0.1);
+
+  background: rgba(255, 255, 255, 0.045);
+}
+
+/* ======================================================
+   CARD COLORS
+====================================================== */
+
+.skills-card--blue {
+  color: #48bfff;
+
+  border-color: rgba(54, 146, 255, 0.13);
+}
+
+.skills-card--blue::before {
+  background: #268aff;
+}
+
+.skills-card--green {
+  color: #4fdfa0;
+
+  border-color: rgba(61, 206, 143, 0.12);
+}
+
+.skills-card--green::before {
+  background: #2ac986;
+}
+
+.skills-card--orange {
+  color: #ffa442;
+
+  border-color: rgba(255, 151, 54, 0.12);
+}
+
+.skills-card--orange::before {
+  background: #ff9637;
+}
+
+.skills-card--purple {
+  color: #9970ff;
+
+  border-color: rgba(133, 93, 255, 0.13);
+}
+
+.skills-card--purple::before {
+  background: #7950ff;
+}
+
+.skills-card--violet {
+  color: #b065ff;
+
+  border-color: rgba(170, 86, 255, 0.13);
+}
+
+.skills-card--violet::before {
+  background: #a44cff;
+}
+
+/* ======================================================
+   HOVER COLOR DETAILS
+====================================================== */
+
+.skills-card--blue:hover {
+  box-shadow: 0 15px 40px rgba(27, 123, 255, 0.055);
+}
+
+.skills-card--green:hover {
+  box-shadow: 0 15px 40px rgba(32, 193, 128, 0.05);
+}
+
+.skills-card--orange:hover {
+  box-shadow: 0 15px 40px rgba(255, 137, 38, 0.05);
+}
+
+.skills-card--purple:hover,
+.skills-card--violet:hover {
+  box-shadow: 0 15px 40px rgba(118, 76, 255, 0.055);
+}
+
+/* ======================================================
+   SKILLS RESPONSIVE
+====================================================== */
+
+@media (max-width: 1180px) {
+  .skills-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 850px) {
+  .skills-section {
+    width: calc(100% - 24px);
+
+    padding: 16px;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .skills-card {
+    min-height: 115px;
+  }
+
+  .skills-card__header h3 {
+    font-size: 9px;
+  }
+
+  .skills-tag {
+    min-height: 22px;
+
+    font-size: 6.5px;
+  }
+}
+/* ======================================================
+   TYPOGRAPHY UPGRADE — BETTER READABILITY
+   Preserve reference layout, increase text sizes only
+====================================================== */
+
+/* ---------- SIDEBAR ---------- */
+
+.ref-nav__label {
+  font-size: 10.5px;
+  font-weight: 550;
+}
+
+.ref-availability small {
+  font-size: 6px;
+}
+
+.ref-availability strong {
+  font-size: 7px;
+}
+
+.ref-cv {
+  font-size: 8px;
+}
+
+/* ---------- HERO STATS ---------- */
+
+.ref-stat strong {
+  font-size: clamp(18px, 1.65vw, 24px);
+}
+
+.ref-stat span {
+  font-size: 7.5px;
+  line-height: 1.45;
+}
+
+/* ---------- ABOUT ---------- */
+
+.about-heading h2 {
+  font-size: 18px;
+  font-weight: 680;
+}
+
+.about-intro {
+  font-size: 11.5px;
+  line-height: 1.65;
+}
+
+.about-text {
+  font-size: 10.5px;
+  line-height: 1.65;
+}
+
+.about-chip {
+  min-height: 42px;
+  padding: 7px 9px;
+}
+
+.about-chip__icon {
+  width: 28px;
+  height: 28px;
+}
+
+.about-chip strong {
+  font-size: 7.5px;
+  font-weight: 600;
+}
+
+.about-chip small {
+  margin-top: 3px;
+  font-size: 6.3px;
+}
+
+.about-status__label {
+  font-size: 7px;
+}
+
+.about-status__time {
+  font-size: 17px;
+}
+
+.about-status__fast {
+  font-size: 7px;
+}
+
+/* ---------- SKILLS SECTION ---------- */
+
+.skills-heading h2 {
+  font-size: 17px;
+  font-weight: 660;
+}
+
+.skills-heading__dot {
+  width: 8px;
+  height: 8px;
+}
+
+.skills-card {
+  min-height: 125px;
+  padding: 14px;
+}
+
+.skills-card__header {
+  gap: 9px;
+  margin-bottom: 14px;
+}
+
+.skills-card__icon {
+  width: 31px;
+  height: 31px;
+}
+
+.skills-card__header h3 {
+  font-size: 10px;
+  font-weight: 620;
+}
+
+.skills-card__tags {
+  gap: 6px;
+}
+
+.skills-tag {
+  min-height: 23px;
+
+  padding: 0 8px;
+
+  font-size: 7px;
+  font-weight: 540;
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+@media (max-width: 1180px) {
+  .about-intro {
+    font-size: 12px;
+  }
+
+  .about-text {
+    font-size: 11px;
+  }
+
+  .skills-card__header h3 {
+    font-size: 10.5px;
+  }
+
+  .skills-tag {
+    font-size: 7.5px;
+  }
+}
+
+@media (max-width: 620px) {
+  .ref-nav__label {
+    font-size: 10px;
+  }
+
+  .about-heading h2 {
+    font-size: 19px;
+  }
+
+  .about-intro {
+    font-size: 13px;
+  }
+
+  .about-text {
+    font-size: 12px;
+  }
+
+  .about-chip strong {
+    font-size: 8.5px;
+  }
+
+  .about-chip small {
+    font-size: 7px;
+  }
+
+  .skills-heading h2 {
+    font-size: 18px;
+  }
+
+  .skills-card__header h3 {
+    font-size: 11px;
+  }
+
+  .skills-tag {
+    min-height: 26px;
+    font-size: 8px;
+  }
+}
+/* ======================================================
+   LARGE DESKTOP TYPOGRAPHY — STRONGER READABILITY
+====================================================== */
+
+/* ---------- SIDEBAR ---------- */
+
+.ref-nav__label {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.ref-availability small {
+  font-size: 7px;
+}
+
+.ref-availability strong {
+  font-size: 8px;
+}
+
+.ref-cv {
+  font-size: 9px;
+}
+
+/* ---------- HERO STATS ---------- */
+
+.ref-stat strong {
+  font-size: 26px;
+}
+
+.ref-stat span {
+  font-size: 9px;
+  line-height: 1.45;
+}
+
+/* ---------- ABOUT TITLE ---------- */
+
+.about-heading h2 {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* ---------- ABOUT PARAGRAPHS ---------- */
+
+.about-intro {
+  font-size: 13.5px;
+  line-height: 1.7;
+}
+
+.about-text {
+  margin-top: 6px;
+
+  font-size: 12.5px;
+  line-height: 1.7;
+}
+
+/* ---------- ABOUT FEATURE CARDS ---------- */
+
+.about-chip {
+  min-height: 51px;
+
+  padding: 9px 11px;
+
+  gap: 9px;
+}
+
+.about-chip__icon {
+  width: 32px;
+  height: 32px;
+}
+
+.about-chip strong {
+  font-size: 9px;
+  font-weight: 650;
+}
+
+.about-chip small {
+  margin-top: 3px;
+
+  font-size: 7.5px;
+  line-height: 1.35;
+}
+
+/* ---------- ABOUT STATUS ---------- */
+
+.about-status__label {
+  font-size: 8px;
+}
+
+.about-status__time {
+  font-size: 20px;
+}
+
+.about-status__fast {
+  font-size: 8px;
+}
+
+.about-collaborators span,
+.about-collaborators strong {
+  width: 31px;
+  height: 31px;
+
+  font-size: 7px;
+}
+
+/* ======================================================
+   SKILLS
+====================================================== */
+
+.skills-section {
+  padding: 22px 20px 22px;
+}
+
+.skills-heading {
+  margin-bottom: 18px;
+}
+
+.skills-heading h2 {
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.skills-heading__dot {
+  width: 9px;
+  height: 9px;
+}
+
+/* ---------- SKILL CARDS ---------- */
+
+.skills-card {
+  min-height: 150px;
+
+  padding: 16px;
+}
+
+.skills-card__header {
+  gap: 11px;
+
+  margin-bottom: 18px;
+}
+
+.skills-card__icon {
+  width: 36px;
+  height: 36px;
+
+  border-radius: 9px;
+}
+
+.skills-card__header h3 {
+  font-size: 12px;
+  font-weight: 650;
+}
+
+/* ---------- TECHNOLOGY PILLS ---------- */
+
+.skills-card__tags {
+  gap: 8px;
+}
+
+.skills-tag {
+  min-height: 29px;
+
+  padding: 0 10px;
+
+  border-radius: 7px;
+
+  font-size: 9px;
+  font-weight: 560;
+}
+
+/* ======================================================
+   LARGE SCREEN FINE TUNING
+====================================================== */
+
+@media (min-width: 1400px) {
+  .about-heading h2 {
+    font-size: 23px;
+  }
+
+  .about-intro {
+    font-size: 14px;
+  }
+
+  .about-text {
+    font-size: 13px;
+  }
+
+  .about-chip strong {
+    font-size: 9.5px;
+  }
+
+  .about-chip small {
+    font-size: 8px;
+  }
+
+  .skills-heading h2 {
+    font-size: 22px;
+  }
+
+  .skills-card__header h3 {
+    font-size: 12.5px;
+  }
+
+  .skills-tag {
+    font-size: 9.5px;
+  }
+}
+
+/* ======================================================
+   MOBILE / TABLET
+====================================================== */
+
+@media (max-width: 900px) {
+  .about-intro {
+    font-size: 14px;
+  }
+
+  .about-text {
+    font-size: 13px;
+  }
+
+  .skills-card__header h3 {
+    font-size: 13px;
+  }
+
+  .skills-tag {
+    font-size: 10px;
+  }
+}

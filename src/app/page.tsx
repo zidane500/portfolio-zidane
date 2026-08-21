@@ -1,6 +1,7 @@
 import Sidebar from "@/components/layout/Sidebar";
 import About from "@/components/sections/About";
 import Hero from "@/components/sections/Hero";
+import Skills from "@/components/sections/Skills";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <div className="ref-main">
         <Hero />
         <About />
+        <Skills />
       </div>
     </main>
   );
