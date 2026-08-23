@@ -91,22 +91,6 @@ export default function Hero() {
             <span />
             Disponible
           </div>
-
-          <button
-            className="ref-theme"
-            type="button"
-            aria-label="Changer le thème"
-            aria-pressed={theme === "light"}
-            onClick={toggleTheme}
-          >
-            <Sun size={11} />
-
-            <span className="ref-theme__track" data-theme-state={theme}>
-              <span />
-            </span>
-
-            <Moon size={11} />
-          </button>
         </div>
       </div>
 

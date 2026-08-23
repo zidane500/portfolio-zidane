@@ -159,34 +159,6 @@ export default function About() {
       </div>
 
       {/* RIGHT STATUS PANEL */}
-
-      <aside className="about-status">
-        <div className="about-status__section">
-          <span className="about-status__label">Temps de réponse</span>
-
-          <strong className="about-status__time">&lt; 24h</strong>
-
-          <span className="about-status__fast">Très réactif</span>
-        </div>
-
-        <div className="about-status__divider" />
-
-        <div className="about-status__section">
-          <span className="about-status__label">Collaborations</span>
-
-          <div className="about-collaborators">
-            <span>Z</span>
-            <span>JS</span>
-            <span>UX</span>
-
-            <strong>+12</strong>
-          </div>
-        </div>
-
-        <div className="about-status__spark" aria-hidden="true">
-          <Sparkles size={16} />
-        </div>
-      </aside>
     </motion.section>
   );
 }
