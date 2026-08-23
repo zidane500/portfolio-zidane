@@ -1,9 +1,13 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Mail, MapPin, Phone, Send, Sparkles } from "lucide-react";
 
+import { siteConfig } from "@/config/site";
+
 export default function Contact() {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <motion.section
       id="contact"
@@ -46,41 +50,61 @@ export default function Contact() {
 
       <div className="contact-center">
         <div className="contact-information">
-          <a href="mailto:hello@zidane.dev" className="contact-info-item">
+          <motion.a
+            href={`mailto:${siteConfig.email}`}
+            className="contact-info-item"
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0 * 0.08 }}
+          >
             <span className="contact-info-item__icon">
               <Mail size={17} />
             </span>
 
             <span>
               <small>Email</small>
-              <strong>hello@zidane.dev</strong>
+              <strong>{siteConfig.email}</strong>
             </span>
-          </a>
+          </motion.a>
 
-          <a href="tel:+33612345678" className="contact-info-item">
+          <motion.a
+            href={`tel:${siteConfig.phone}`}
+            className="contact-info-item"
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 1 * 0.08 }}
+          >
             <span className="contact-info-item__icon">
               <Phone size={17} />
             </span>
 
             <span>
               <small>Téléphone</small>
-              <strong>+33 6 12 34 56 78</strong>
+              <strong>{siteConfig.phone}</strong>
             </span>
-          </a>
+          </motion.a>
 
-          <div className="contact-info-item">
+          <motion.div
+            className="contact-info-item"
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 2 * 0.08 }}
+          >
             <span className="contact-info-item__icon">
               <MapPin size={17} />
             </span>
 
             <span>
               <small>Localisation</small>
-              <strong>Paris, France</strong>
+              <strong>{siteConfig.location}</strong>
             </span>
-          </div>
+          </motion.div>
         </div>
 
-        <a href="mailto:hello@zidane.dev" className="contact-button">
+        <a href={`mailto:${siteConfig.email}`} className="contact-button">
           <span>Démarrer un projet</span>
 
           <ArrowRight size={17} />
@@ -103,12 +127,12 @@ export default function Contact() {
         <motion.div
           className="contact-crystal"
           animate={{
-            y: [0, -9, 0],
-            rotateY: [0, 7, 0, -7, 0],
+            y: prefersReducedMotion ? 0 : [0, -9, 0],
+            rotateY: prefersReducedMotion ? 0 : [0, 7, 0, -7, 0],
           }}
           transition={{
             duration: 6,
-            repeat: Infinity,
+            repeat: prefersReducedMotion ? 0 : Infinity,
             ease: "easeInOut",
           }}
         >

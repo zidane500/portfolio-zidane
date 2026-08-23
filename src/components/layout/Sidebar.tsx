@@ -21,6 +21,8 @@ import { useEffect, useRef, useState } from "react";
 
 import type { MouseEvent as ReactMouseEvent } from "react";
 
+import { siteConfig } from "@/config/site";
+
 const navigation = [
   {
     id: "home",
@@ -274,16 +276,24 @@ export default function Sidebar() {
                 onClick={(event) => handleNavigation(event, item.id)}
               >
                 {/*
-                  IMPORTANT :
-                  plus de motion.span,
-                  plus de layoutId.
-
-                  Le fond violet apparaît
-                  DIRECTEMENT sur le bouton.
+                  Indicateur animé : layoutId permet à Framer Motion
+                  de faire glisser ces deux éléments d'un item à l'autre
+                  au lieu de les faire apparaître/disparaître brutalement.
+                  Sûr ici car tous les items ont la même taille.
                 */}
 
                 {active && (
-                  <span className="ref-nav__active" aria-hidden="true" />
+                  <motion.span
+                    layoutId="ref-nav__active-bg"
+                    className="ref-nav__active"
+                    aria-hidden="true"
+                    transition={{
+                      type: "spring",
+                      stiffness: 500,
+                      damping: 34,
+                      mass: 0.7,
+                    }}
+                  />
                 )}
 
                 <span className="ref-nav__iconBox">
@@ -293,7 +303,17 @@ export default function Sidebar() {
                 <span className="ref-nav__label">{item.label}</span>
 
                 {active && (
-                  <span className="ref-nav__indicator" aria-hidden="true" />
+                  <motion.span
+                    layoutId="ref-nav__active-tick"
+                    className="ref-nav__indicator"
+                    aria-hidden="true"
+                    transition={{
+                      type: "spring",
+                      stiffness: 500,
+                      damping: 34,
+                      mass: 0.7,
+                    }}
+                  />
                 )}
               </a>
             );
@@ -302,7 +322,7 @@ export default function Sidebar() {
 
         {/* CV */}
 
-        <a href="/cv-zidane.pdf" className="ref-cv ref-cv--nav" download>
+        <a href={siteConfig.cvPath} className="ref-cv ref-cv--nav" download>
           <Download size={16} strokeWidth={1.7} />
 
           <span>Télécharger CV</span>
@@ -324,16 +344,28 @@ export default function Sidebar() {
           </div>
 
           <div className="ref-socials">
-            <a href="#" aria-label="GitHub" title="GitHub">
+            <a
+              href={siteConfig.social.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              title="GitHub"
+            >
               <FaGithub />
             </a>
 
-            <a href="#" aria-label="LinkedIn" title="LinkedIn">
+            <a
+              href={siteConfig.social.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              title="LinkedIn"
+            >
               <FaLinkedinIn />
             </a>
 
             <a
-              href="mailto:haffarzidane@gmail.com"
+              href={`mailto:${siteConfig.email}`}
               aria-label="Gmail"
               title="Gmail"
             >
@@ -341,7 +373,7 @@ export default function Sidebar() {
             </a>
 
             <a
-              href="https://wa.me/21652827067"
+              href={`https://wa.me/${siteConfig.whatsapp}`}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="WhatsApp"

@@ -1,9 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
-const projects = [
+import ProjectCard, { type Project } from "./ProjectCard";
+
+const projects: Project[] = [
   {
     title: "Nova SaaS",
     type: "SaaS",
@@ -69,118 +71,7 @@ export default function Projects() {
 
       <div className="projects-grid">
         {projects.map((project, index) => (
-          <motion.article
-            key={project.title}
-            className={`project-card ${project.className}`}
-            initial={{
-              opacity: 0,
-              y: 18,
-            }}
-            whileInView={{
-              opacity: 1,
-              y: 0,
-            }}
-            viewport={{
-              once: true,
-            }}
-            transition={{
-              duration: 0.55,
-              delay: index * 0.08,
-            }}
-          >
-            <div className="project-card__copy">
-              <div className="project-card__top">
-                <h3>{project.title}</h3>
-
-                <span className="project-card__type">{project.type}</span>
-              </div>
-
-              <p>{project.description}</p>
-
-              <div className="project-card__tags">
-                {project.technologies.map((technology) => (
-                  <span key={technology}>{technology}</span>
-                ))}
-              </div>
-
-              <a
-                href="#"
-                className="project-card__link"
-                aria-label={`Voir le projet ${project.title}`}
-              >
-                Voir le projet
-                <ExternalLink size={12} />
-              </a>
-            </div>
-
-            <div
-              className={`project-visual project-visual--${project.visual}`}
-              aria-hidden="true"
-            >
-              {project.visual === "dashboard" && (
-                <div className="project-dashboard">
-                  <div className="project-dashboard__sidebar">
-                    <span />
-                    <span />
-                    <span />
-                    <span />
-                  </div>
-
-                  <div className="project-dashboard__content">
-                    <div className="project-dashboard__head">
-                      <span />
-                      <span />
-                    </div>
-
-                    <div className="project-dashboard__cards">
-                      <span />
-                      <span />
-                      <span />
-                    </div>
-
-                    <div className="project-dashboard__chart">
-                      <i />
-                      <i />
-                      <i />
-                      <i />
-                      <i />
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {project.visual === "cinema" && (
-                <div className="project-cinema">
-                  <div className="project-cinema__hero">
-                    <span>CINEVERSE</span>
-                  </div>
-
-                  <div className="project-cinema__posters">
-                    <span />
-                    <span />
-                    <span />
-                    <span />
-                  </div>
-                </div>
-              )}
-
-              {project.visual === "green" && (
-                <div className="project-green">
-                  <span className="project-green__label">GREENFOLIO</span>
-
-                  <div className="project-green__plant">
-                    <i />
-                    <i />
-                    <i />
-                    <i />
-                    <i />
-                  </div>
-
-                  <span className="project-green__line" />
-                </div>
-              )}
-            </div>
-          </motion.article>
+          <ProjectCard key={project.title} project={project} index={index} />
         ))}
       </div>
     </motion.section>

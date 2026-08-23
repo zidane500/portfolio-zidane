@@ -12,6 +12,8 @@ import {
   Sparkles,
 } from "lucide-react";
 
+import { siteConfig } from "@/config/site";
+
 const qualities = [
   {
     icon: Radar,
@@ -94,7 +96,7 @@ export default function About() {
 
         <div className="about-location">
           <MapPin size={10} />
-          Basé à Paris
+          Basé à {siteConfig.location}
         </div>
       </div>
 
@@ -119,13 +121,28 @@ export default function About() {
         </p>
 
         <div className="about-chips">
-          {qualities.map((quality) => {
+          {qualities.map((quality, index) => {
             const Icon = quality.icon;
 
             return (
-              <div
+              <motion.div
                 key={quality.label}
                 className={`about-chip ${quality.className}`}
+                initial={{
+                  opacity: 0,
+                  y: 12,
+                }}
+                whileInView={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                viewport={{
+                  once: true,
+                }}
+                transition={{
+                  duration: 0.5,
+                  delay: index * 0.06,
+                }}
               >
                 <span className="about-chip__icon">
                   <Icon size={12} />
@@ -135,7 +152,7 @@ export default function About() {
                   <strong>{quality.label}</strong>
                   <small>{quality.description}</small>
                 </span>
-              </div>
+              </motion.div>
             );
           })}
         </div>

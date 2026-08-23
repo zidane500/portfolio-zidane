@@ -1,6 +1,12 @@
 "use client";
 
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import {
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 
 import {
   ArrowRight,
@@ -24,7 +30,17 @@ import {
 
 import type { MouseEvent } from "react";
 
+import { siteConfig } from "@/config/site";
+import AnimatedCounter from "@/components/ui/AnimatedCounter";
+import MagneticButton from "@/components/ui/MagneticButton";
+import { useTheme } from "@/components/providers/ThemeProvider";
+
 export default function Hero() {
+  // Coupe les animations en boucle infinie pour les visiteurs qui
+  // ont activé "Réduire les animations" au niveau système (accessibilité)
+  const prefersReducedMotion = useReducedMotion();
+  const { theme, toggleTheme } = useTheme();
+
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -68,7 +84,7 @@ export default function Hero() {
         <div className="ref-top-controls">
           <div className="ref-location">
             <MapPin size={11} />
-            Paris, France
+            {siteConfig.location}
           </div>
 
           <div className="ref-online">
@@ -80,10 +96,12 @@ export default function Hero() {
             className="ref-theme"
             type="button"
             aria-label="Changer le thème"
+            aria-pressed={theme === "light"}
+            onClick={toggleTheme}
           >
             <Sun size={11} />
 
-            <span className="ref-theme__track">
+            <span className="ref-theme__track" data-theme-state={theme}>
               <span />
             </span>
 
@@ -136,15 +154,21 @@ export default function Hero() {
           </p>
 
           <div className="ref-actions">
-            <a href="#projects" className="ref-button ref-button--primary">
+            <MagneticButton
+              href="#projects"
+              className="ref-button ref-button--primary"
+            >
               Voir mes projets
               <ArrowRight size={15} />
-            </a>
+            </MagneticButton>
 
-            <a href="#contact" className="ref-button ref-button--secondary">
+            <MagneticButton
+              href="#contact"
+              className="ref-button ref-button--secondary"
+            >
               Me contacter
               <Send size={14} />
-            </a>
+            </MagneticButton>
           </div>
 
           <div className="ref-scroll-hint">
@@ -188,11 +212,11 @@ export default function Hero() {
           <motion.div
             className="ref-tech ref-tech--react"
             animate={{
-              y: [0, -9, 0],
+              y: prefersReducedMotion ? 0 : [0, -9, 0],
             }}
             transition={{
               duration: 4,
-              repeat: Infinity,
+              repeat: prefersReducedMotion ? 0 : Infinity,
               ease: "easeInOut",
             }}
           >
@@ -202,12 +226,12 @@ export default function Hero() {
           <motion.div
             className="ref-tech ref-tech--next"
             animate={{
-              x: [0, -6, 0],
-              y: [0, 6, 0],
+              x: prefersReducedMotion ? 0 : [0, -6, 0],
+              y: prefersReducedMotion ? 0 : [0, 6, 0],
             }}
             transition={{
               duration: 5,
-              repeat: Infinity,
+              repeat: prefersReducedMotion ? 0 : Infinity,
               ease: "easeInOut",
             }}
           >
@@ -217,11 +241,11 @@ export default function Hero() {
           <motion.div
             className="ref-tech ref-tech--ts"
             animate={{
-              y: [0, 10, 0],
+              y: prefersReducedMotion ? 0 : [0, 10, 0],
             }}
             transition={{
               duration: 4.8,
-              repeat: Infinity,
+              repeat: prefersReducedMotion ? 0 : Infinity,
               ease: "easeInOut",
             }}
           >
@@ -231,12 +255,12 @@ export default function Hero() {
           <motion.div
             className="ref-tech ref-tech--tailwind"
             animate={{
-              x: [0, 7, 0],
-              y: [0, -5, 0],
+              x: prefersReducedMotion ? 0 : [0, 7, 0],
+              y: prefersReducedMotion ? 0 : [0, -5, 0],
             }}
             transition={{
               duration: 5.3,
-              repeat: Infinity,
+              repeat: prefersReducedMotion ? 0 : Infinity,
               ease: "easeInOut",
             }}
           >
@@ -366,7 +390,9 @@ export default function Hero() {
           </div>
 
           <div>
-            <strong>4+</strong>
+            <strong>
+              <AnimatedCounter value={4} suffix="+" />
+            </strong>
             <span>Années d&apos;expérience</span>
           </div>
         </div>
@@ -377,7 +403,9 @@ export default function Hero() {
           </div>
 
           <div>
-            <strong>30+</strong>
+            <strong>
+              <AnimatedCounter value={30} suffix="+" />
+            </strong>
             <span>Projets livrés</span>
           </div>
         </div>
@@ -388,7 +416,9 @@ export default function Hero() {
           </div>
 
           <div>
-            <strong>15+</strong>
+            <strong>
+              <AnimatedCounter value={15} suffix="+" />
+            </strong>
             <span>Clients satisfaits</span>
           </div>
         </div>
@@ -399,7 +429,9 @@ export default function Hero() {
           </div>
 
           <div>
-            <strong>99%</strong>
+            <strong>
+              <AnimatedCounter value={99} suffix="%" />
+            </strong>
             <span>Satisfaction</span>
           </div>
         </div>
@@ -410,7 +442,9 @@ export default function Hero() {
           </div>
 
           <div>
-            <strong>10k+</strong>
+            <strong>
+              <AnimatedCounter value={10} suffix="k+" />
+            </strong>
             <span>Lignes de code</span>
           </div>
         </div>
