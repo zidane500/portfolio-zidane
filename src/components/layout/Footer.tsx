@@ -30,26 +30,19 @@ export default function Footer() {
       }}
     >
       <div className="footer-brand">
-        <a href="#home" className="footer-logo" aria-label="Retour à l'accueil">
-          Z<span>H</span>
-        </a>
-
         <span className="footer-copyright">
           © 2026 Zidane. Tous droits réservés.
         </span>
       </div>
 
-      <nav className="footer-links" aria-label="Liens légaux">
-        <a href="#">Mentions légales</a>
-
-        <a href="#">Politique de confidentialité</a>
-      </nav>
+      <a href="#home" className="footer-logo" aria-label="Retour à l'accueil">
+        Z<span>H</span>
+      </a>
 
       <div className="footer-right">
         <span className="footer-love">
           Fait avec
-          <Heart size={12} fill="currentColor" strokeWidth={1.5} />& beaucoup de
-          café
+          <Heart size={12} fill="currentColor" strokeWidth={1.5} />
         </span>
 
         <button

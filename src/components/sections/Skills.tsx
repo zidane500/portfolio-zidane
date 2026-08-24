@@ -1,12 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
+
 import {
-  CloudCog,
+  Code2,
   Database,
   MonitorSmartphone,
-  ServerCog,
-  Shapes,
+  Smartphone,
+  Wrench,
 } from "lucide-react";
 
 const skillGroups = [
@@ -14,31 +15,59 @@ const skillGroups = [
     title: "Frontend",
     icon: MonitorSmartphone,
     className: "skills-card--blue",
-    skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    skills: [
+      "React.js",
+      "Next.js",
+      "TypeScript",
+      "JavaScript",
+      "HTML5",
+      "CSS3",
+      "Tailwind CSS",
+      "Vite",
+      "shadcn/ui",
+    ],
   },
+
   {
     title: "Backend",
-    icon: ServerCog,
+    icon: Code2,
     className: "skills-card--green",
-    skills: ["Node.js", "NestJS", "Express", "GraphQL", "REST API"],
+    skills: ["PHP", "Laravel", "REST API", "Eloquent"],
   },
+
   {
-    title: "Base de données",
+    title: "Bases de données",
     icon: Database,
     className: "skills-card--orange",
-    skills: ["PostgreSQL", "MongoDB", "Redis", "Prisma", "Supabase"],
+    skills: ["PostgreSQL", "MySQL", "SQL"],
   },
+
   {
-    title: "Outils & DevOps",
-    icon: CloudCog,
+    title: "Mobile & Desktop",
+    icon: Smartphone,
     className: "skills-card--purple",
-    skills: ["Docker", "Git", "CI/CD", "AWS", "Vercel"],
+    skills: ["Java", "Android Studio", "Electron"],
   },
+
   {
-    title: "Autres",
-    icon: Shapes,
+    title: "Outils & Métier",
+    icon: Wrench,
     className: "skills-card--violet",
-    skills: ["Figma", "Storybook", "Vitest", "ESLint", "Prettier"],
+    skills: [
+      "Git & GitHub",
+
+      "Docker",
+      "Postman",
+      "IA",
+
+      "Figma",
+      "Figma Make",
+      "Chart.js",
+      "ERP",
+      "Excel",
+      "Gestion de stock",
+      "Facturation",
+    ],
   },
 ];
 

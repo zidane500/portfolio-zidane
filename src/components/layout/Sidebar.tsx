@@ -8,7 +8,7 @@ import {
   Download,
   Home,
   Mail,
-  MessageSquareQuote,
+  GraduationCap,
   PanelsTopLeft,
   UserRound,
 } from "lucide-react";
@@ -50,9 +50,9 @@ const navigation = [
     icon: BriefcaseBusiness,
   },
   {
-    id: "testimonials",
-    label: "Témoignages",
-    icon: MessageSquareQuote,
+    id: "education",
+    label: "Formation",
+    icon: GraduationCap,
   },
   {
     id: "contact",
@@ -322,9 +322,12 @@ export default function Sidebar() {
 
         {/* CV */}
 
-        <a href={siteConfig.cvPath} className="ref-cv ref-cv--nav" download>
+        <a
+          href={siteConfig.cvPath}
+          className="ref-cv ref-cv--nav"
+          download="CV-Zidane.pdf"
+        >
           <Download size={16} strokeWidth={1.7} />
-
           <span>Télécharger CV</span>
         </a>
 

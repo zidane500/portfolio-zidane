@@ -7,31 +7,37 @@ import ProjectCard, { type Project } from "./ProjectCard";
 
 const projects: Project[] = [
   {
-    title: "Nova SaaS",
-    type: "SaaS",
+    title: "Plateforme LMS",
+    type: "Application Web",
     description:
-      "Plateforme SaaS tout-en-un pour gérer, analyser et automatiser les opérations d'une entreprise.",
-    technologies: ["Next.js", "TypeScript", "PostgreSQL"],
+      "Conception et développement d'une plateforme LMS permettant la gestion des contenus, le suivi des utilisateurs et le reporting.",
+    features: ["Gestion des contenus", "Suivi utilisateurs", "Reporting"],
     className: "project-card--nova",
-    visual: "dashboard",
+    visual: "lms",
   },
+
   {
-    title: "Cineverse",
-    type: "Web App",
+    title: "E-commerce SaaS",
+    type: "Application Web",
     description:
-      "Application moderne de découverte de films avec recommandations, favoris et expériences immersives.",
-    technologies: ["React", "TMDB API", "Tailwind CSS"],
+      "Développement d'une solution e-commerce SaaS dédiée à la gestion des catalogues produits, des stocks et des commandes.",
+    features: [
+      "Catalogue produits",
+      "Gestion des stocks",
+      "Gestion des commandes",
+    ],
     className: "project-card--cineverse",
-    visual: "cinema",
+    visual: "ecommerce",
   },
+
   {
-    title: "Greenfolio",
-    type: "Landing",
+    title: "Gestion de Stock",
+    type: "Outil Métier",
     description:
-      "Landing page éco-responsable conçue pour une marque engagée avec une direction artistique premium.",
-    technologies: ["Framer", "GSAP", "CMS"],
+      "Développement d'une application web de gestion de stock pour digitaliser le suivi des flux et améliorer la fiabilité des données.",
+    features: ["Entrées / sorties", "Traçabilité", "Suivi des stocks"],
     className: "project-card--greenfolio",
-    visual: "green",
+    visual: "stock",
   },
 ];
 
@@ -60,11 +66,12 @@ export default function Projects() {
       <div className="projects-heading">
         <div className="projects-heading__title">
           <span className="projects-heading__dot" />
-          <h2>Projets vedettes</h2>
+
+          <h2>Projets réalisés</h2>
         </div>
 
-        <a href="#projects" className="projects-heading__link">
-          Voir tous les projets
+        <a href="#experience" className="projects-heading__link">
+          Voir mon expérience
           <ArrowRight size={14} />
         </a>
       </div>

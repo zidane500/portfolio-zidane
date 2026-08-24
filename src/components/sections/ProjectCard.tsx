@@ -9,9 +9,9 @@ export interface Project {
   title: string;
   type: string;
   description: string;
-  technologies: string[];
+  features: string[];
   className: string;
-  visual: "dashboard" | "cinema" | "green";
+  visual: "lms" | "ecommerce" | "stock";
   url?: string;
 }
 
@@ -45,6 +45,8 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
         delay: index * 0.08,
       }}
     >
+      {/* CONTENT */}
+
       <div className="project-card__copy">
         <div className="project-card__top">
           <h3>{project.title}</h3>
@@ -55,88 +57,168 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
         <p>{project.description}</p>
 
         <div className="project-card__tags">
-          {project.technologies.map((technology) => (
-            <span key={technology}>{technology}</span>
+          {project.features.map((feature) => (
+            <span key={feature}>{feature}</span>
           ))}
         </div>
 
-        <a
-          href={project.url ?? "#"}
-          className="project-card__link"
-          aria-label={`Voir le projet ${project.title}`}
-          {...(project.url
-            ? { target: "_blank", rel: "noopener noreferrer" }
-            : {})}
-        >
-          Voir le projet
-          <ExternalLink size={12} />
-        </a>
+        {project.url ? (
+          <a
+            href={project.url}
+            className="project-card__link"
+            aria-label={`Voir le projet ${project.title}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Voir le projet
+            <ExternalLink size={12} />
+          </a>
+        ) : (
+          <span className="project-card__link">Projet réalisé</span>
+        )}
       </div>
+
+      {/* VISUAL */}
 
       <div
         className={`project-visual project-visual--${project.visual}`}
         aria-hidden="true"
       >
-        {project.visual === "dashboard" && (
-          <div className="project-dashboard">
-            <div className="project-dashboard__sidebar">
-              <span />
-              <span />
-              <span />
-              <span />
+        {/* LMS */}
+
+        {project.visual === "lms" && (
+          <div className="project-lms">
+            <div className="project-lms__topbar">
+              <span className="project-lms__logo">LMS</span>
+
+              <div className="project-lms__dots">
+                <i />
+                <i />
+                <i />
+              </div>
             </div>
 
-            <div className="project-dashboard__content">
-              <div className="project-dashboard__head">
+            <div className="project-lms__body">
+              <div className="project-lms__sidebar">
                 <span />
-                <span />
-              </div>
-
-              <div className="project-dashboard__cards">
                 <span />
                 <span />
                 <span />
               </div>
 
-              <div className="project-dashboard__chart">
-                <i />
-                <i />
-                <i />
-                <i />
-                <i />
+              <div className="project-lms__content">
+                <div className="project-lms__title">Tableau de bord</div>
+
+                <div className="project-lms__cards">
+                  <span />
+                  <span />
+                  <span />
+                </div>
+
+                <div className="project-lms__progress">
+                  <span>
+                    <i />
+                  </span>
+
+                  <span>
+                    <i />
+                  </span>
+
+                  <span>
+                    <i />
+                  </span>
+                </div>
               </div>
             </div>
           </div>
         )}
 
-        {project.visual === "cinema" && (
-          <div className="project-cinema">
-            <div className="project-cinema__hero">
-              <span>CINEVERSE</span>
+        {/* E-COMMERCE */}
+
+        {project.visual === "ecommerce" && (
+          <div className="project-shop">
+            <div className="project-shop__header">
+              <strong>STORE</strong>
+
+              <span>Cart • 3</span>
             </div>
 
-            <div className="project-cinema__posters">
-              <span />
-              <span />
-              <span />
-              <span />
+            <div className="project-shop__hero">
+              <span>E-COMMERCE</span>
+              <small>Dashboard</small>
+            </div>
+
+            <div className="project-shop__products">
+              <div>
+                <span />
+                <small>Produit</small>
+              </div>
+
+              <div>
+                <span />
+                <small>Produit</small>
+              </div>
+
+              <div>
+                <span />
+                <small>Produit</small>
+              </div>
             </div>
           </div>
         )}
 
-        {project.visual === "green" && (
-          <div className="project-green">
-            <span className="project-green__label">GREENFOLIO</span>
+        {/* STOCK */}
 
-            <div className="project-green__plant">
-              <i />
-              <i />
-              <i />
-              <i />
-              <i />
+        {project.visual === "stock" && (
+          <div className="project-stock">
+            <div className="project-stock__header">
+              <strong>STOCK</strong>
+
+              <span>LIVE</span>
             </div>
 
-            <span className="project-green__line" />
+            <div className="project-stock__metrics">
+              <div>
+                <small>Entrées</small>
+                <strong>+128</strong>
+              </div>
+
+              <div>
+                <small>Sorties</small>
+                <strong>84</strong>
+              </div>
+
+              <div>
+                <small>Alertes</small>
+                <strong>03</strong>
+              </div>
+            </div>
+
+            <div className="project-stock__table">
+              <span>
+                <i />
+                <b />
+                <em />
+              </span>
+
+              <span>
+                <i />
+                <b />
+                <em />
+              </span>
+
+              <span>
+                <i />
+                <b />
+                <em />
+              </span>
+
+              <span>
+                <i />
+                <b />
+                <em />
+              </span>
+            </div>
           </div>
         )}
       </div>

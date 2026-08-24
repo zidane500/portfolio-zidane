@@ -2,53 +2,51 @@
 
 import { motion } from "framer-motion";
 import {
-  Braces,
-  Gauge,
-  Layers3,
-  MapPin,
-  Palette,
-  Radar,
-  ShieldCheck,
-  Sparkles,
+  Boxes,
+  Code2,
+  Database,
+  MonitorSmartphone,
+  ServerCog,
+  Smartphone,
 } from "lucide-react";
 
-import { siteConfig } from "@/config/site";
+import Image from "next/image";
 
 const qualities = [
   {
-    icon: Radar,
-    label: "Approche centrée utilisateur",
-    description: "UX d'abord, toujours.",
+    icon: Code2,
+    label: "Développement Full Stack",
+    description: "Du frontend au backend, avec une vision complète.",
     className: "about-chip--blue",
   },
   {
-    icon: Braces,
-    label: "Code propre & scalable",
-    description: "Performance et maintenabilité.",
+    icon: MonitorSmartphone,
+    label: "React & Next.js",
+    description: "Interfaces web modernes et responsives.",
     className: "about-chip--green",
   },
   {
-    icon: Palette,
-    label: "Design & UX premium",
-    description: "Interfaces modernes et élégantes.",
+    icon: ServerCog,
+    label: "Laravel & REST API",
+    description: "Backends structurés et APIs métier.",
     className: "about-chip--orange",
   },
   {
-    icon: Gauge,
-    label: "Performance & SEO",
-    description: "Rapide, visible et optimisé.",
+    icon: Database,
+    label: "PostgreSQL & MySQL",
+    description: "Conception et gestion des données.",
     className: "about-chip--purple",
   },
   {
-    icon: ShieldCheck,
-    label: "Sécurité & bonnes pratiques",
-    description: "Des fondations fiables.",
+    icon: Smartphone,
+    label: "Mobile & Desktop",
+    description: "Android, Java et applications Electron.",
     className: "about-chip--orange",
   },
   {
-    icon: Layers3,
-    label: "Veille techno continue",
-    description: "Toujours apprendre et évoluer.",
+    icon: Boxes,
+    label: "ERP & Solutions Métier",
+    description: "Stock, facturation et processus d'entreprise.",
     className: "about-chip--violet",
   },
 ];
@@ -84,19 +82,15 @@ export default function About() {
 
         <div className="about-portrait__glow" />
 
-        <div className="about-avatar">
-          <div className="about-avatar__halo" />
-
-          <div className="about-avatar__head" />
-
-          <div className="about-avatar__body">
-            <span className="about-avatar__signature">Zidane</span>
-          </div>
-        </div>
-
-        <div className="about-location">
-          <MapPin size={10} />
-          Basé à {siteConfig.location}
+        <div className="about-photo">
+          <Image
+            src="/images/zidane-about.png"
+            alt="Portrait de Zidane"
+            fill
+            priority
+            sizes="(max-width: 850px) 80vw, 300px"
+            className="about-photo__image"
+          />
         </div>
       </div>
 
@@ -110,14 +104,16 @@ export default function About() {
         </div>
 
         <p className="about-intro">
-          Développeur Full Stack & créatif numérique, j&apos;aide les
-          entreprises et les porteurs de projets à transformer leurs idées en
-          produits digitaux performants, fiables et élégants.
+          Diplômé en Informatique de Gestion, spécialité E-Business, je
+          développe des applications web, mobiles et des solutions métier en
+          combinant développement Full Stack et compréhension des besoins de
+          l&apos;entreprise.
         </p>
 
         <p className="about-text">
-          J&apos;aime réunir technologie, design et stratégie pour créer des
-          expériences modernes qui génèrent de l&apos;impact.
+          J&apos;aime transformer des besoins concrets en solutions fiables,
+          simples à utiliser et maintenables, qu&apos;il s&apos;agisse
+          d&apos;applications web, mobiles ou d&apos;outils de gestion.
         </p>
 
         <div className="about-chips">

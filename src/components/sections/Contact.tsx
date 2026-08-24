@@ -32,17 +32,18 @@ export default function Contact() {
       {/* LEFT */}
 
       <div className="contact-copy">
-        <span className="contact-eyebrow">Un projet en tête ?</span>
+        <span className="contact-eyebrow">Vous souhaitez me contacter ?</span>
 
         <h2>
-          Créons quelque chose
+          Échangeons autour de
           <br />
-          <span>d&apos;extraordinaire.</span>
+          <span>vos besoins.</span>
         </h2>
 
         <p>
-          Discutons de votre idée et construisons ensemble une expérience
-          digitale moderne, performante et mémorable.
+          Je suis disponible pour échanger autour d&apos;opportunités
+          professionnelles, de projets de développement web ou mobile, ainsi que
+          de solutions informatiques adaptées aux besoins de l&apos;entreprise.
         </p>
       </div>
 
@@ -105,7 +106,7 @@ export default function Contact() {
         </div>
 
         <a href={`mailto:${siteConfig.email}`} className="contact-button">
-          <span>Démarrer un projet</span>
+          <span>Me contacter</span>
 
           <ArrowRight size={17} />
         </a>

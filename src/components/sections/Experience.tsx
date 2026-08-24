@@ -3,41 +3,79 @@
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { Code2, MonitorSmartphone, Rocket, Sparkles } from "lucide-react";
+import { siteConfig } from "@/config/site";
 
 const experiences = [
   {
-    period: "2022 — Aujourd’hui",
-    role: "Développeur Full Stack",
-    company: "Freelance",
-    location: "Paris, France",
+    period: "Fév. 2026 — Mai 2026",
+    role: "Développeur Full Stack Stagiaire",
+    company: "Maison Du Web",
+    detail: "Plateforme LMS",
     icon: Rocket,
     className: "experience-item--blue",
   },
   {
-    period: "2020 — 2022",
-    role: "Développeur Frontend",
-    company: "TechLabs",
-    location: "Paris, France",
+    period: "Juil. 2025 — Sept. 2025",
+    role: "Développeur Full Stack Stagiaire",
+    company: "Maison Du Web",
+    detail: "Solution E-commerce SaaS",
     icon: Code2,
     className: "experience-item--purple",
   },
   {
-    period: "2019 — 2020",
-    role: "Intégrateur Web",
-    company: "Digitalify",
-    location: "Paris, France",
+    period: "Juin 2023 — Août 2024",
+    role: "Agent Administration & Développement Web",
+    company: "GKM",
+    detail: "Gestion de stock & logistique",
     icon: MonitorSmartphone,
     className: "experience-item--violet",
   },
   {
-    period: "2018 — 2019",
-    role: "Développeur Junior",
-    company: "WebAgency",
-    location: "Paris, France",
+    period: "Juin 2021 — Août 2022",
+    role: "Agent Administration & Développement Mobile",
+    company: "GKM",
+    detail: "Stock, automatisation & suivi des flux",
     icon: Sparkles,
     className: "experience-item--cyan",
   },
 ];
+
+function TimelineNode({
+  progress,
+  index,
+}: {
+  progress: ReturnType<typeof useSpring>;
+  index: number;
+}) {
+  // Position de chaque point par rapport au déplacement de la lumière
+  const thresholds = [0, 0.25, 0.53, 0.82];
+
+  const threshold = thresholds[index];
+
+  const lightOpacity = useTransform(
+    progress,
+    [Math.max(0, threshold - 0.015), threshold],
+    [0, 1],
+  );
+
+  const lightScale = useTransform(
+    progress,
+    [Math.max(0, threshold - 0.015), threshold],
+    [0.7, 1],
+  );
+
+  return (
+    <span className="experience-item__node" aria-hidden="true">
+      <motion.span
+        className="experience-item__nodeLight"
+        style={{
+          opacity: lightOpacity,
+          scale: lightScale,
+        }}
+      />
+    </span>
+  );
+}
 
 export default function Experience() {
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -84,8 +122,13 @@ export default function Experience() {
           <h2>Expérience professionnelle</h2>
         </div>
 
-        <a href="#" className="experience-heading__link">
-          Voir mon profil complet
+        <a
+          href={siteConfig.cvPath}
+          className="experience-heading__link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Voir mon CV complet
           <span>→</span>
         </a>
       </div>
@@ -151,11 +194,11 @@ export default function Experience() {
                 <div className="experience-item__copy">
                   <h3>{experience.role}</h3>
                   <strong>{experience.company}</strong>
-                  <span>{experience.location}</span>
+                  <span>{experience.detail}</span>
                 </div>
               </div>
 
-              <span className="experience-item__node" aria-hidden="true" />
+              <TimelineNode progress={progress} index={index} />
             </motion.article>
           );
         })}

@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 
 import {
+  SiLaravel,
   SiNextdotjs,
   SiReact,
   SiTailwindcss,
@@ -31,7 +32,6 @@ import {
 import type { MouseEvent } from "react";
 
 import { siteConfig } from "@/config/site";
-import AnimatedCounter from "@/components/ui/AnimatedCounter";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { useTheme } from "@/components/providers/ThemeProvider";
 
@@ -119,17 +119,17 @@ export default function Hero() {
           </h1>
 
           <h2 className="ref-role">
-            Développeur Full Stack & Créatif Numérique
+            Développeur Full Stack & Solutions Métier
           </h2>
 
           <p className="ref-description">
-            Je conçois des expériences digitales rapides et centrées
-            utilisateur.
+            Je développe des applications web, mobiles et des solutions métier
+            adaptées aux besoins réels des entreprises.
           </p>
 
           <p className="ref-description ref-description--small">
-            Développeur Full Stack passionné par le code propre, les interfaces
-            futuristes et les idées qui font la différence.
+            React, TypeScript, Laravel, PostgreSQL, Android et ERP : je combine
+            développement logiciel et compréhension des processus métier.
           </p>
 
           <div className="ref-actions">
@@ -205,6 +205,21 @@ export default function Hero() {
             }}
           >
             <SiNextdotjs />
+          </motion.div>
+
+          <motion.div
+            className="ref-tech ref-tech--laravel"
+            animate={{
+              x: prefersReducedMotion ? 0 : [0, 5, 0],
+              y: prefersReducedMotion ? 0 : [0, -7, 0],
+            }}
+            transition={{
+              duration: 4.6,
+              repeat: prefersReducedMotion ? 0 : Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            <SiLaravel />
           </motion.div>
 
           <motion.div
@@ -285,7 +300,7 @@ export default function Hero() {
                   <span className="ref-line">05</span>
                   <code>
                     &nbsp;&nbsp;&nbsp;
-                    <em>&quot;React&quot;</em>,
+                    <em>&quot;React + TypeScript&quot;</em>,
                   </code>
                 </div>
 
@@ -293,7 +308,7 @@ export default function Hero() {
                   <span className="ref-line">06</span>
                   <code>
                     &nbsp;&nbsp;&nbsp;
-                    <em>&quot;Next.js&quot;</em>,
+                    <em>&quot;PHP + Laravel&quot;</em>,
                   </code>
                 </div>
 
@@ -301,7 +316,7 @@ export default function Hero() {
                   <span className="ref-line">07</span>
                   <code>
                     &nbsp;&nbsp;&nbsp;
-                    <em>&quot;TypeScript&quot;</em>,
+                    <em>&quot;PostgreSQL + MySQL&quot;</em>,
                   </code>
                 </div>
 
@@ -314,7 +329,7 @@ export default function Hero() {
                   <span className="ref-line">09</span>
                   <code>
                     &nbsp;&nbsp;focus:{" "}
-                    <em>&quot;Créer des produits qui comptent&quot;</em>
+                    <em>&quot;Web • Mobile • Solutions métier&quot;</em>
                   </code>
                 </div>
 
@@ -352,68 +367,7 @@ export default function Hero() {
           duration: 0.7,
           delay: 0.4,
         }}
-      >
-        <div className="ref-stat ref-stat--blue">
-          <div className="ref-stat__icon">
-            <Zap size={20} />
-          </div>
-
-          <div>
-            <strong>
-              <AnimatedCounter value={4} suffix="+" />
-            </strong>
-            <span>Années d&apos;expérience</span>
-          </div>
-        </div>
-
-        <div className="ref-stat ref-stat--purple">
-          <div className="ref-stat__icon">
-            <Package size={18} />
-          </div>
-
-          <div>
-            <strong>
-              <AnimatedCounter value={30} suffix="+" />
-            </strong>
-            <span>Projets livrés</span>
-          </div>
-        </div>
-
-        <div className="ref-stat ref-stat--green">
-          <div className="ref-stat__icon">
-            <Users size={18} />
-          </div>
-
-          <div>
-            <strong>
-              <AnimatedCounter value={15} suffix="+" />
-            </strong>
-            <span>Clients satisfaits</span>
-          </div>
-        </div>
-
-        <div className="ref-stat ref-stat--orange">
-          <div className="ref-stat__icon">
-            <Award size={18} />
-          </div>
-
-          <div>
-            <strong>
-              <AnimatedCounter value={99} suffix="%" />
-            </strong>
-            <span>Satisfaction</span>
-          </div>
-        </div>
-
-        <div className="ref-stat ref-stat--cyan">
-          <div className="ref-stat__icon ref-stat__infinity">∞</div>
-
-          <div>
-            <strong>∞</strong>
-            <span>Passion & Curiosité</span>
-          </div>
-        </div>
-      </motion.div>
+      ></motion.div>
     </section>
   );
 }
