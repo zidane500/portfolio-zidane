@@ -145,7 +145,7 @@ export default function About() {
                 }}
               >
                 <span className="about-chip__icon">
-                  <Icon size={12} />
+                  <Icon size={18} />
                 </span>
 
                 <span className="about-chip__copy">

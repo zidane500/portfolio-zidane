@@ -83,8 +83,8 @@ export default function Hero() {
 
         <div className="ref-top-controls">
           <div className="ref-location">
-            <MapPin size={11} />
-            {siteConfig.location}
+            <MapPin size={16} />
+            Tunisie
           </div>
 
           <div className="ref-online">
@@ -112,15 +112,10 @@ export default function Hero() {
             ease: [0.16, 1, 0.3, 1],
           }}
         >
-          <div className="ref-dev-badge">
-            <Code2 size={12} />
-            Développeur Full Stack & Créatif Numérique
-          </div>
-
           <h1 className="ref-title">
             <span className="ref-title__hello">Salut, je suis</span>
 
-            <span className="ref-title__name">Zidane.</span>
+            <span className="ref-title__name">Zidane Haffar</span>
           </h1>
 
           <h2 className="ref-role">
@@ -128,7 +123,7 @@ export default function Hero() {
           </h2>
 
           <p className="ref-description">
-            Je conçois des expériences digitales rapides, élégantes et centrées
+            Je conçois des expériences digitales rapides et centrées
             utilisateur.
           </p>
 
@@ -143,7 +138,7 @@ export default function Hero() {
               className="ref-button ref-button--primary"
             >
               Voir mes projets
-              <ArrowRight size={15} />
+              <ArrowRight size={18} />
             </MagneticButton>
 
             <MagneticButton
@@ -151,18 +146,8 @@ export default function Hero() {
               className="ref-button ref-button--secondary"
             >
               Me contacter
-              <Send size={14} />
+              <Send size={16} />
             </MagneticButton>
-          </div>
-
-          <div className="ref-scroll-hint">
-            <span className="ref-scroll-hint__mouse">
-              <span />
-            </span>
-
-            <span>Scroll pour explorer</span>
-
-            <span className="ref-scroll-hint__line" />
           </div>
         </motion.div>
 
@@ -370,7 +355,7 @@ export default function Hero() {
       >
         <div className="ref-stat ref-stat--blue">
           <div className="ref-stat__icon">
-            <Zap size={18} />
+            <Zap size={20} />
           </div>
 
           <div>
@@ -417,19 +402,6 @@ export default function Hero() {
               <AnimatedCounter value={99} suffix="%" />
             </strong>
             <span>Satisfaction</span>
-          </div>
-        </div>
-
-        <div className="ref-stat ref-stat--orange">
-          <div className="ref-stat__icon">
-            <Code2 size={18} />
-          </div>
-
-          <div>
-            <strong>
-              <AnimatedCounter value={10} suffix="k+" />
-            </strong>
-            <span>Lignes de code</span>
           </div>
         </div>
 
