@@ -27,8 +27,8 @@ export async function sendContactMessage(
   _prevState: ContactFormState,
   formData: FormData,
 ): Promise<ContactFormState> {
+  const name = String(formData.get("name") ?? "").trim();
   const email = String(formData.get("email") ?? "").trim();
-
   const message = String(formData.get("message") ?? "").trim();
 
   /*
@@ -47,13 +47,18 @@ export async function sendContactMessage(
   /*
    * Vérification des champs obligatoires.
    */
-  if (!email || !message) {
+  if (!name || !email || !message) {
     return {
       success: false,
       message: "Merci de remplir tous les champs.",
     };
   }
-
+  if (name.length > 100) {
+    return {
+      success: false,
+      message: "Nom trop long (100 caractères max).",
+    };
+  }
   /*
    * Vérification de l'adresse email.
    */
@@ -93,10 +98,11 @@ export async function sendContactMessage(
        */
       replyTo: sanitizeHeaderValue(email),
 
-      subject: "Nouveau message depuis mon portfolio",
+      subject: `Nouveau message de ${sanitizeHeaderValue(name)}`,
 
       text: `Nouveau message depuis le portfolio
 
+Nom : ${name}
 Email : ${email}
 
 Message :

@@ -32,21 +32,21 @@ const skillGroups = [
     title: "Backend",
     icon: Code2,
     className: "skills-card--green",
-    skills: ["PHP", "Laravel", "REST API", "Eloquent"],
+    skills: ["PHP", "Laravel", "REST API", "Eloquent", "API Integration"],
   },
 
   {
     title: "Bases de données",
     icon: Database,
     className: "skills-card--orange",
-    skills: ["PostgreSQL", "MySQL", "SQL"],
+    skills: ["PostgreSQL", "MySQL", "SQLite", "MongoDB", "Firebase"],
   },
 
   {
     title: "Mobile & Desktop",
     icon: Smartphone,
     className: "skills-card--purple",
-    skills: ["Java", "Android Studio", "Electron"],
+    skills: ["Java", "Android Studio", "Electron", "Flutter", "React Native"],
   },
 
   {

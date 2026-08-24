@@ -84,24 +84,6 @@ export default function Contact() {
             </span>
           </motion.a>
 
-          <motion.a
-            href={`tel:${siteConfig.phone}`}
-            className="contact-info-item"
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 1 * 0.08 }}
-          >
-            <span className="contact-info-item__icon">
-              <Phone size={17} />
-            </span>
-
-            <span>
-              <small>Téléphone</small>
-              <strong>{siteConfig.phone}</strong>
-            </span>
-          </motion.a>
-
           <motion.div
             className="contact-info-item"
             initial={{ opacity: 0, y: 12 }}
@@ -119,12 +101,6 @@ export default function Contact() {
             </span>
           </motion.div>
         </div>
-
-        <a href={`mailto:${siteConfig.email}`} className="contact-button">
-          <span>Me contacter</span>
-
-          <ArrowRight size={17} />
-        </a>
       </div>
 
       {/* HOLOGRAM */}
@@ -192,6 +168,23 @@ export default function Contact() {
         </div>
 
         <form ref={formRef} action={formAction} className="contact-form">
+          {/* NOM */}
+
+          <div className="contact-form__field">
+            <label htmlFor="contact-name">Nom</label>
+
+            <input
+              id="contact-name"
+              name="name"
+              type="text"
+              placeholder="Votre nom"
+              autoComplete="name"
+              maxLength={100}
+              required
+              disabled={isPending}
+            />
+          </div>
+
           {/* EMAIL */}
 
           <div className="contact-form__field">
