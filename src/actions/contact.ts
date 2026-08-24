@@ -12,45 +12,61 @@ export type ContactFormState = {
 };
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 const MESSAGE_MAX_LENGTH = 5000;
 
 /**
- * Empêche l'injection d'en-têtes email (CRLF) via un champ contrôlé
- * par l'utilisateur (ex: "name" injecté dans le subject).
+ * Empêche l'injection CRLF dans les valeurs utilisées
+ * dans les headers / subject des emails.
  */
 function sanitizeHeaderValue(value: string) {
   return value.replace(/[\r\n]/g, " ").slice(0, 200);
 }
 
-/**
- * Server Action appelée par le formulaire de contact (via useActionState).
- * Signature (prevState, formData) => imposée par React 19 pour les actions
- * branchées sur un <form action={...}>.
- */
 export async function sendContactMessage(
   _prevState: ContactFormState,
   formData: FormData,
 ): Promise<ContactFormState> {
-  const name = String(formData.get("name") ?? "").trim();
   const email = String(formData.get("email") ?? "").trim();
+
   const message = String(formData.get("message") ?? "").trim();
 
-  // Honeypot anti-spam : champ caché visuellement, seuls les bots le remplissent.
-  // Le champ correspondant sera ajouté au formulaire à l'étape suivante (name="company").
+  /*
+   * Honeypot anti-spam.
+   * Ce champ sera invisible dans le formulaire.
+   */
   const honeypot = String(formData.get("company") ?? "").trim();
+
   if (honeypot) {
-    // On répond "succès" sans rien envoyer, pour ne pas indiquer au bot qu'il a été repéré.
-    return { success: true, message: "Message envoyé !" };
+    return {
+      success: true,
+      message: "Message envoyé !",
+    };
   }
 
-  if (!name || !email || !message) {
-    return { success: false, message: "Merci de remplir tous les champs." };
+  /*
+   * Vérification des champs obligatoires.
+   */
+  if (!email || !message) {
+    return {
+      success: false,
+      message: "Merci de remplir tous les champs.",
+    };
   }
 
+  /*
+   * Vérification de l'adresse email.
+   */
   if (!EMAIL_REGEX.test(email)) {
-    return { success: false, message: "Adresse email invalide." };
+    return {
+      success: false,
+      message: "Adresse email invalide.",
+    };
   }
 
+  /*
+   * Limitation du message.
+   */
   if (message.length > MESSAGE_MAX_LENGTH) {
     return {
       success: false,
@@ -60,19 +76,36 @@ export async function sendContactMessage(
 
   try {
     const { error } = await resend.emails.send({
-      // Domaine de test Resend : fonctionne sans vérification DNS tant que
-      // "to" est l'adresse email du compte Resend (siteConfig.email).
-      // Une fois un domaine vérifié sur resend.com/domains, remplacer par
-      // ex. "Portfolio Zidane <contact@tondomaine.com>".
+      /*
+       * Pour commencer avec Resend.
+       */
       from: "Portfolio Zidane <onboarding@resend.dev>",
+
+      /*
+       * Ton vrai email défini dans siteConfig.
+       */
       to: siteConfig.email,
-      replyTo: email,
-      subject: `Nouveau message de ${sanitizeHeaderValue(name)}`,
-      text: `De : ${name} (${email})\n\n${message}`,
+
+      /*
+       * Lorsque tu cliqueras sur "Répondre",
+       * la réponse ira directement à la personne
+       * qui a rempli le formulaire.
+       */
+      replyTo: sanitizeHeaderValue(email),
+
+      subject: "Nouveau message depuis mon portfolio",
+
+      text: `Nouveau message depuis le portfolio
+
+Email : ${email}
+
+Message :
+${message}`,
     });
 
     if (error) {
       console.error("Resend error:", error);
+
       return {
         success: false,
         message: "Une erreur est survenue. Réessaie un peu plus tard.",
@@ -81,10 +114,11 @@ export async function sendContactMessage(
 
     return {
       success: true,
-      message: "Message envoyé, merci ! Je réponds rapidement.",
+      message: "Message envoyé, merci ! Je vous répondrai rapidement.",
     };
-  } catch (err) {
-    console.error("Contact form error:", err);
+  } catch (error) {
+    console.error("Contact form error:", error);
+
     return {
       success: false,
       message: "Une erreur est survenue. Réessaie un peu plus tard.",

@@ -4,9 +4,24 @@ import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Mail, MapPin, Phone, Send, Sparkles } from "lucide-react";
 
 import { siteConfig } from "@/config/site";
+import { useActionState, useEffect, useRef } from "react";
+import { sendContactMessage } from "@/actions/contact";
 
 export default function Contact() {
   const prefersReducedMotion = useReducedMotion();
+
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const [state, formAction, isPending] = useActionState(sendContactMessage, {
+    success: false,
+    message: "",
+  });
+
+  useEffect(() => {
+    if (state.success) {
+      formRef.current?.reset();
+    }
+  }, [state.success]);
 
   return (
     <motion.section
@@ -161,6 +176,92 @@ export default function Contact() {
         <div className="contact-hologram__platform">
           <span />
         </div>
+      </div>
+      {/* CONTACT FORM */}
+
+      <div className="contact-form-wrapper">
+        <div className="contact-form-header">
+          <span className="contact-form-eyebrow">Formulaire de contact</span>
+
+          <h3>Envoyez-moi un message</h3>
+
+          <p>
+            Une question, une opportunité ou un projet ? Je vous répondrai
+            directement par e-mail.
+          </p>
+        </div>
+
+        <form ref={formRef} action={formAction} className="contact-form">
+          {/* EMAIL */}
+
+          <div className="contact-form__field">
+            <label htmlFor="contact-email">Votre e-mail</label>
+
+            <input
+              id="contact-email"
+              name="email"
+              type="email"
+              placeholder="exemple@email.com"
+              autoComplete="email"
+              required
+              disabled={isPending}
+            />
+          </div>
+
+          {/* MESSAGE */}
+
+          <div className="contact-form__field">
+            <label htmlFor="contact-message">Votre message</label>
+
+            <textarea
+              id="contact-message"
+              name="message"
+              placeholder="Écrivez votre message..."
+              rows={6}
+              maxLength={5000}
+              required
+              disabled={isPending}
+            />
+          </div>
+
+          {/* HONEYPOT */}
+
+          <input
+            type="text"
+            name="company"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            className="contact-form__honeypot"
+          />
+
+          {/* STATUS */}
+
+          {state.message && (
+            <p
+              className={`contact-form__status ${
+                state.success
+                  ? "contact-form__status--success"
+                  : "contact-form__status--error"
+              }`}
+              aria-live="polite"
+            >
+              {state.message}
+            </p>
+          )}
+
+          {/* BUTTON */}
+
+          <button
+            type="submit"
+            className="contact-form__submit"
+            disabled={isPending}
+          >
+            <span>{isPending ? "Envoi en cours..." : "Envoyer"}</span>
+
+            <Send size={17} />
+          </button>
+        </form>
       </div>
     </motion.section>
   );
