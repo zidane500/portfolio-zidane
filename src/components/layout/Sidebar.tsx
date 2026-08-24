@@ -15,8 +15,6 @@ import {
 
 import { FaGithub, FaLinkedinIn, FaWhatsapp } from "react-icons/fa6";
 
-import { SiGmail } from "react-icons/si";
-
 import { useEffect, useRef, useState } from "react";
 
 import type { MouseEvent as ReactMouseEvent } from "react";
@@ -365,14 +363,6 @@ export default function Sidebar() {
               title="LinkedIn"
             >
               <FaLinkedinIn />
-            </a>
-
-            <a
-              href={`mailto:${siteConfig.email}`}
-              aria-label="Gmail"
-              title="Gmail"
-            >
-              <SiGmail />
             </a>
 
             <a

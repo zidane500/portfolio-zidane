@@ -18,15 +18,15 @@ export const siteConfig = {
    * Le CV ne précise pas si ton numéro est aussi ton WhatsApp.
    * On le complétera seulement si tu me le confirmes.
    */
-  whatsapp: "TODO",
+  whatsapp: "21652827067",
 
   /*
    * GitHub et LinkedIn ne figurent pas dans ton CV.
    * Ne mettons donc pas de faux liens.
    */
   social: {
-    github: "TODO",
-    linkedin: "TODO",
+    github: "https://github.com/zidane500",
+    linkedin: "https://www.linkedin.com/in/zidane-haffar-637134403/",
   },
 
   cvPath: "/cv/cv-zidane.pdf",

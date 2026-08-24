@@ -7478,6 +7478,8 @@ a.contact-info-item:hover {
 }
 
 .contact-form__submit {
+  position: relative;
+  top: -39px;
   min-height: 43px;
 
   display: inline-flex;
