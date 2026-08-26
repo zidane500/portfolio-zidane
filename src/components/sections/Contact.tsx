@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, Mail, MapPin, Phone, Send, Sparkles } from "lucide-react";
+import { Mail, MapPin, Send, Sparkles } from "lucide-react";
 
 import { siteConfig } from "@/config/site";
 import { useActionState, useEffect, useRef } from "react";

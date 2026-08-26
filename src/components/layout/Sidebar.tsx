@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 import {
   BriefcaseBusiness,
@@ -9,7 +9,9 @@ import {
   Home,
   Mail,
   GraduationCap,
+  Moon,
   PanelsTopLeft,
+  Sun,
   UserRound,
 } from "lucide-react";
 
@@ -20,6 +22,7 @@ import { useEffect, useRef, useState } from "react";
 import type { MouseEvent as ReactMouseEvent } from "react";
 
 import { siteConfig } from "@/config/site";
+import { useTheme } from "@/components/providers/ThemeProvider";
 
 const navigation = [
   {
@@ -61,6 +64,10 @@ const navigation = [
 
 export default function Sidebar() {
   const [activeItem, setActiveItem] = useState("home");
+
+  const { theme, toggleTheme } = useTheme();
+
+  const prefersReducedMotion = useReducedMotion();
 
   /*
    * Quand l'utilisateur clique sur le menu,
@@ -328,6 +335,62 @@ export default function Sidebar() {
           <Download size={16} strokeWidth={1.7} />
           <span>Télécharger CV</span>
         </a>
+
+        {/* THEME TOGGLE */}
+
+        <button
+          type="button"
+          onClick={toggleTheme}
+          className="ref-theme-toggle"
+          aria-label={
+            theme === "dark"
+              ? "Activer le thème clair"
+              : "Activer le thème sombre"
+          }
+          title={theme === "dark" ? "Thème clair" : "Thème sombre"}
+        >
+          <AnimatePresence mode="wait" initial={false}>
+            {theme === "dark" ? (
+              <motion.span
+                key="sun"
+                className="ref-theme-toggle__icon"
+                initial={
+                  prefersReducedMotion
+                    ? false
+                    : { opacity: 0, rotate: -90, scale: 0.6 }
+                }
+                animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                exit={
+                  prefersReducedMotion
+                    ? undefined
+                    : { opacity: 0, rotate: 90, scale: 0.6 }
+                }
+                transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <Sun size={15} strokeWidth={1.7} />
+              </motion.span>
+            ) : (
+              <motion.span
+                key="moon"
+                className="ref-theme-toggle__icon"
+                initial={
+                  prefersReducedMotion
+                    ? false
+                    : { opacity: 0, rotate: 90, scale: 0.6 }
+                }
+                animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                exit={
+                  prefersReducedMotion
+                    ? undefined
+                    : { opacity: 0, rotate: -90, scale: 0.6 }
+                }
+                transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <Moon size={15} strokeWidth={1.7} />
+              </motion.span>
+            )}
+          </AnimatePresence>
+        </button>
 
         {/* BOTTOM */}
 

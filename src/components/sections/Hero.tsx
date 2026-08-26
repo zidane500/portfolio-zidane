@@ -8,18 +8,7 @@ import {
   useTransform,
 } from "framer-motion";
 
-import {
-  ArrowRight,
-  Award,
-  Code2,
-  MapPin,
-  Moon,
-  Package,
-  Send,
-  Sun,
-  Users,
-  Zap,
-} from "lucide-react";
+import { ArrowRight, MapPin, Send } from "lucide-react";
 
 import {
   SiLaravel,
@@ -31,15 +20,12 @@ import {
 
 import type { MouseEvent } from "react";
 
-import { siteConfig } from "@/config/site";
 import MagneticButton from "@/components/ui/MagneticButton";
-import { useTheme } from "@/components/providers/ThemeProvider";
 
 export default function Hero() {
   // Coupe les animations en boucle infinie pour les visiteurs qui
   // ont activé "Réduire les animations" au niveau système (accessibilité)
   const prefersReducedMotion = useReducedMotion();
-  const { theme, toggleTheme } = useTheme();
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);

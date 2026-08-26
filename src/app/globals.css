@@ -994,6 +994,53 @@ a {
   text-decoration: none;
 }
 
+/* THEME TOGGLE */
+
+.ref-theme-toggle {
+  width: 30px;
+  height: 30px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 10px auto 0;
+
+  border: none;
+  border-radius: var(--radius-sm);
+
+  background: transparent;
+
+  color: var(--sidebar-text-muted);
+
+  cursor: pointer;
+
+  transition:
+    color 180ms ease,
+    background 180ms ease,
+    transform 180ms ease;
+}
+
+.ref-theme-toggle:hover {
+  color: var(--sidebar-text-hover);
+
+  background: var(--white-06);
+
+  transform: translateY(-2px);
+}
+
+.ref-theme-toggle:active {
+  transform: translateY(0) scale(0.92);
+}
+
+.ref-theme-toggle__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* ======================================================
    HERO
 ====================================================== */
@@ -1799,11 +1846,11 @@ a {
   .ref-hero__main {
     grid-template-columns: 1fr;
 
-    padding-top: 45px;
+    padding-top: 45px !important;
   }
 
   .ref-hologram {
-    min-height: 470px;
+    min-height: 470px !important;
   }
 
   .ref-stats {
@@ -1826,12 +1873,24 @@ a {
   .ref-sidebar {
     top: auto;
     bottom: 13px;
-    left: 50%;
+    left: 13px;
+    right: 13px;
 
-    width: min(calc(100% - 26px), 610px);
+    /*
+     * Centrage SANS `transform`, volontairement : ce composant est un
+     * <motion.aside> Framer Motion (animate={{ x: 0 }} pour l'entrée).
+     * Framer Motion pilote la propriété CSS `transform` via un style
+     * inline, ce qui écrase silencieusement tout `transform` posé ici
+     * en feuille de style (donc un centrage classique en
+     * `left:50% + transform:translateX(-50%)` ne s'applique jamais
+     * une fois l'animation montée — la barre restait ancrée à gauche,
+     * avec jusqu'à ~45% de sa largeur hors écran sur mobile).
+     */
+    width: auto;
+    max-width: 610px;
+    margin: 0 auto;
+
     height: 66px;
-
-    transform: translateX(-50%);
 
     border-radius: 19px;
   }
@@ -1841,10 +1900,19 @@ a {
 
     align-items: center;
 
+    gap: 4px;
+
     padding: 7px 9px;
   }
 
+  .sidebar-logo {
+    flex-shrink: 0;
+  }
+
   .ref-nav {
+    flex: 1 1 auto;
+    min-width: 0;
+
     flex-direction: row;
 
     justify-content: space-around;
@@ -1853,17 +1921,49 @@ a {
   }
 
   .ref-nav__item {
+    min-width: 0;
     min-height: 44px;
 
     justify-content: center;
 
-    padding: 0 10px;
+    gap: 0 !important;
+
+    padding-left: 4px !important;
+    padding-right: 4px !important;
+  }
+
+  .ref-nav__iconBox {
+    width: 18px !important;
+    min-width: 18px !important;
+
+    flex: 0 0 18px !important;
   }
 
   .ref-nav__label,
   .ref-nav__indicator,
   .ref-sidebar__bottom {
     display: none;
+  }
+
+  .ref-cv--nav {
+    flex-shrink: 0;
+
+    width: 34px;
+    min-height: 34px;
+
+    padding: 0;
+
+    gap: 0;
+  }
+
+  .ref-cv--nav span {
+    display: none;
+  }
+
+  .ref-theme-toggle {
+    flex-shrink: 0;
+
+    margin: 0;
   }
 
   .ref-hero__top {
@@ -1893,7 +1993,7 @@ a {
   }
 
   .ref-hologram {
-    min-height: 390px;
+    min-height: 390px !important;
   }
 
   .ref-hologram__grid,
@@ -1918,13 +2018,13 @@ a {
   }
 
   .ref-stat {
-    padding: 8px 5px;
-    gap: 5px;
+    padding: 8px 5px !important;
+    gap: 5px !important;
   }
 
   .ref-stat__icon {
-    width: 28px;
-    height: 28px;
+    width: 28px !important;
+    height: 28px !important;
   }
 
   .ref-location {
@@ -2612,14 +2712,14 @@ a {
   }
 
   .about-portrait {
-    min-height: 250px;
+    min-height: 250px !important;
 
     border-right: 0;
     border-bottom: 1px solid var(--white-04);
   }
 
   .about-content {
-    padding: 25px 20px;
+    padding: 25px 20px !important;
   }
 }
 
@@ -2629,15 +2729,15 @@ a {
   }
 
   .about-chip {
-    min-height: 44px;
+    min-height: 44px !important;
   }
 
   .about-chip strong {
-    font-size: 7px;
+    font-size: 7px !important;
   }
 
   .about-chip small {
-    font-size: 6px;
+    font-size: 6px !important;
   }
 }
 /* ======================================================
@@ -2646,10 +2746,6 @@ a {
 
 .about-section {
   min-height: 226px;
-  grid-template-columns:
-    minmax(270px, 0.82fr)
-    minmax(560px, 2fr)
-    178px;
 }
 
 .about-portrait {
@@ -3263,176 +3359,186 @@ a {
 }
 /* ======================================================
    LARGE DESKTOP TYPOGRAPHY — STRONGER READABILITY
+   Scopé à min-width:901px : ce bloc n'était pas protégé par
+   un media query malgré son nom, il écrasait donc silencieusement
+   toutes les valeurs mobile/tablette définies plus haut dans le
+   fichier (About, Skills, Sidebar, Hero stats). Le comportement
+   desktop (≥901px) reste strictement identique : ces règles
+   gagnaient déjà la cascade à ces largeurs.
 ====================================================== */
 
-/* ---------- SIDEBAR ---------- */
+@media (min-width: 901px) {
+  /* ---------- SIDEBAR ---------- */
 
-.ref-nav__label {
-  font-size: 12px;
-  font-weight: 600;
-}
+  .ref-nav__label {
+    font-size: 12px;
+    font-weight: 600;
+  }
 
-.ref-availability small {
-  font-size: 7px;
-}
+  .ref-availability small {
+    font-size: 7px;
+  }
 
-.ref-availability strong {
-  font-size: 8px;
-}
+  .ref-availability strong {
+    font-size: 8px;
+  }
 
-.ref-cv {
-  font-size: 9px;
-}
+  .ref-cv {
+    font-size: 9px;
+  }
 
-/* ---------- HERO STATS ---------- */
+  /* ---------- HERO STATS ---------- */
 
-.ref-stat strong {
-  font-size: 26px;
-}
+  .ref-stat strong {
+    font-size: 26px;
+  }
 
-.ref-stat span {
-  font-size: clamp(10px, 1vw, 14px);
-  line-height: 1.55;
-  white-space: nowrap;
-}
+  .ref-stat span {
+    font-size: clamp(10px, 1vw, 14px);
+    line-height: 1.55;
+    white-space: nowrap;
+  }
 
-/* ---------- ABOUT TITLE ---------- */
+  /* ---------- ABOUT TITLE ---------- */
 
-.about-heading h2 {
-  font-size: 22px;
-  font-weight: 700;
-}
+  .about-heading h2 {
+    font-size: 22px;
+    font-weight: 700;
+  }
 
-/* ---------- ABOUT PARAGRAPHS ---------- */
+  /* ---------- ABOUT PARAGRAPHS ---------- */
 
-.about-intro {
-  font-size: 13.5px;
-  line-height: 1.7;
-}
+  .about-intro {
+    font-size: 13.5px;
+    line-height: 1.7;
+  }
 
-.about-text {
-  margin-top: 6px;
+  .about-text {
+    margin-top: 6px;
 
-  font-size: 12.5px;
-  line-height: 1.7;
-}
+    font-size: 12.5px;
+    line-height: 1.7;
+  }
 
-/* ---------- ABOUT FEATURE CARDS ---------- */
+  /* ---------- ABOUT FEATURE CARDS ---------- */
 
-.about-chip {
-  min-height: 64px;
+  .about-chip {
+    min-height: 64px;
 
-  padding: 12px 14px;
+    padding: 12px 14px;
 
-  gap: 10px;
-}
+    gap: 10px;
+  }
 
-.about-chip__icon {
-  width: 38px;
-  height: 38px;
-}
+  .about-chip__icon {
+    width: 38px;
+    height: 38px;
+  }
 
-.about-chip strong {
-  font-size: 13px;
-  font-weight: 650;
+  .about-chip strong {
+    font-size: 13px;
+    font-weight: 650;
 
-  white-space: normal;
-}
+    white-space: normal;
+  }
 
-.about-chip small {
-  margin-top: 3px;
+  .about-chip small {
+    margin-top: 3px;
 
-  font-size: 10.5px;
-  line-height: 1.35;
+    font-size: 10.5px;
+    line-height: 1.35;
 
-  white-space: normal;
-}
+    white-space: normal;
+  }
 
-/* ---------- ABOUT STATUS ---------- */
+  /* ---------- ABOUT STATUS ---------- */
 
-.about-status__label {
-  font-size: 8px;
-}
+  .about-status__label {
+    font-size: 8px;
+  }
 
-.about-status__time {
-  font-size: 20px;
-}
+  .about-status__time {
+    font-size: 20px;
+  }
 
-.about-status__fast {
-  font-size: 8px;
-}
+  .about-status__fast {
+    font-size: 8px;
+  }
 
-.about-collaborators span,
-.about-collaborators strong {
-  width: 31px;
-  height: 31px;
+  .about-collaborators span,
+  .about-collaborators strong {
+    width: 31px;
+    height: 31px;
 
-  font-size: 7px;
+    font-size: 7px;
+  }
 }
 
 /* ======================================================
    SKILLS
 ====================================================== */
 
-.skills-section {
-  padding: 22px 20px 22px;
-}
+@media (min-width: 901px) {
+  .skills-section {
+    padding: 22px 20px 22px;
+  }
 
-.skills-heading {
-  margin-bottom: 18px;
-}
+  .skills-heading {
+    margin-bottom: 18px;
+  }
 
-.skills-heading h2 {
-  font-size: 21px;
-  font-weight: 700;
-}
+  .skills-heading h2 {
+    font-size: 21px;
+    font-weight: 700;
+  }
 
-.skills-heading__dot {
-  width: 9px;
-  height: 9px;
-}
+  .skills-heading__dot {
+    width: 9px;
+    height: 9px;
+  }
 
-/* ---------- SKILL CARDS ---------- */
+  /* ---------- SKILL CARDS ---------- */
 
-.skills-card {
-  min-height: 150px;
+  .skills-card {
+    min-height: 150px;
 
-  padding: 16px;
-}
+    padding: 16px;
+  }
 
-.skills-card__header {
-  gap: 11px;
+  .skills-card__header {
+    gap: 11px;
 
-  margin-bottom: 18px;
-}
+    margin-bottom: 18px;
+  }
 
-.skills-card__icon {
-  width: 36px;
-  height: 36px;
+  .skills-card__icon {
+    width: 36px;
+    height: 36px;
 
-  border-radius: 9px;
-}
+    border-radius: 9px;
+  }
 
-.skills-card__header h3 {
-  font-size: 12px;
-  font-weight: 650;
-}
+  .skills-card__header h3 {
+    font-size: 12px;
+    font-weight: 650;
+  }
 
-/* ---------- TECHNOLOGY PILLS ---------- */
+  /* ---------- TECHNOLOGY PILLS ---------- */
 
-.skills-card__tags {
-  gap: 8px;
-}
+  .skills-card__tags {
+    gap: 8px;
+  }
 
-.skills-tag {
-  min-height: 29px;
+  .skills-tag {
+    min-height: 29px;
 
-  padding: 0 10px;
+    padding: 0 10px;
 
-  border-radius: 7px;
+    border-radius: 7px;
 
-  font-size: 9px;
-  font-weight: 560;
+    font-size: 9px;
+    font-weight: 560;
+  }
 }
 
 /* ======================================================
@@ -4419,7 +4525,7 @@ a {
   }
 
   .experience-item {
-    min-height: auto;
+    min-height: auto !important;
 
     padding-inline: 5px;
   }
@@ -5658,11 +5764,23 @@ a {
 
 @media (max-width: 850px) {
   .contact-form-wrapper {
-    padding: 20px;
+    padding: 20px !important;
   }
 
   .contact-form {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
+  }
+
+  /*
+   * Le placement explicite desktop (nth-child(3) en colonne 2,
+   * étalé sur 2 lignes) crée sinon une colonne implicite même
+   * quand le parent ne définit plus qu'une seule colonne — le
+   * champ message se retrouvait affiché à côté des deux autres
+   * au lieu d'être empilé en dessous.
+   */
+  .contact-form__field:nth-child(3) {
+    grid-column: 1 !important;
+    grid-row: auto !important;
   }
 
   .contact-form__submit {
@@ -5672,16 +5790,16 @@ a {
 
 @media (max-width: 600px) {
   .contact-form-wrapper {
-    padding: 16px;
+    padding: 16px !important;
   }
 
   .contact-form-header h3 {
-    font-size: 18px;
+    font-size: 18px !important;
   }
 
   .contact-form__field input,
   .contact-form__field textarea {
-    font-size: 12px;
+    font-size: 12px !important;
   }
 }
 
@@ -6718,32 +6836,38 @@ a.contact-info-item:hover {
 }
 /* ======================================================
    EXPERIENCE — NODES ACTIVÉS PAR LA LUMIÈRE
+   Scopé à min-width:1101px : les points ne doivent apparaître que
+   lorsque le rail de la timeline est visible (masqué ≤1100px avec
+   `.experience-item__node{display:none}`, sinon ils flottent sans
+   ligne de connexion).
 ====================================================== */
 
-.experience-item__node {
-  background: #111827;
-  border-color: rgba(255, 255, 255, 0.16);
-  box-shadow: none;
+@media (min-width: 1101px) {
+  .experience-item__node {
+    background: #111827;
+    border-color: rgba(255, 255, 255, 0.16);
+    box-shadow: none;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-.experience-item__nodeLight {
-  position: absolute;
-  inset: -2px;
+  .experience-item__nodeLight {
+    position: absolute;
+    inset: -2px;
 
-  border-radius: 50%;
+    border-radius: 50%;
 
-  background: currentColor;
+    background: currentColor;
 
-  box-shadow:
-    0 0 7px currentColor,
-    0 0 14px color-mix(in srgb, currentColor 55%, transparent),
-    0 0 22px color-mix(in srgb, currentColor 25%, transparent);
+    box-shadow:
+      0 0 7px currentColor,
+      0 0 14px color-mix(in srgb, currentColor 55%, transparent),
+      0 0 22px color-mix(in srgb, currentColor 25%, transparent);
 
-  transform-origin: center;
+    transform-origin: center;
+  }
 }
 /* ======================================================
    ABOUT — REAL PORTRAIT
