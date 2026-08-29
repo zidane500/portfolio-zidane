@@ -170,7 +170,7 @@ export default function Contact() {
         <form ref={formRef} action={formAction} className="contact-form">
           {/* NOM */}
 
-          <div className="contact-form__field">
+          <div className="contact-form__field contact-form__field--name">
             <label htmlFor="contact-name">Nom</label>
 
             <input
@@ -187,7 +187,7 @@ export default function Contact() {
 
           {/* EMAIL */}
 
-          <div className="contact-form__field">
+          <div className="contact-form__field contact-form__field--email">
             <label htmlFor="contact-email">Votre e-mail</label>
 
             <input
@@ -203,7 +203,7 @@ export default function Contact() {
 
           {/* MESSAGE */}
 
-          <div className="contact-form__field">
+          <div className="contact-form__field contact-form__field--message">
             <label htmlFor="contact-message">Votre message</label>
 
             <textarea

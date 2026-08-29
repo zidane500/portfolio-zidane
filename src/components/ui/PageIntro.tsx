@@ -1,12 +1,39 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useState } from "react";
+import {
+  useEffect,
+  useLayoutEffect,
+  useState,
+  useSyncExternalStore,
+} from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 // useLayoutEffect ne fonctionne que côté client ; sur le serveur on retombe
 // sur useEffect pour éviter l'avertissement React "no-op on the server".
 const useIsomorphicLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
+
+// Détection "monté côté client" sans passer par un effect + setState (ce
+// qui déclencherait un rendu en cascade) : useSyncExternalStore renvoie la
+// snapshot serveur (false) pendant le SSR et l'hydratation, puis bascule
+// sur la snapshot client (true) juste après -> exactement le pattern
+// recommandé par React pour ce cas précis.
+function subscribeNoop() {
+  return () => {};
+}
+function getClientSnapshot() {
+  return true;
+}
+function getServerSnapshot() {
+  return false;
+}
+function useHasMounted() {
+  return useSyncExternalStore(
+    subscribeNoop,
+    getClientSnapshot,
+    getServerSnapshot,
+  );
+}
 
 /**
  * Écran de garde plein écran affiché ~0.9s au premier chargement,
@@ -20,6 +47,14 @@ const useIsomorphicLayoutEffect =
 export default function PageIntro() {
   const prefersReducedMotion = useReducedMotion();
   const [isVisible, setIsVisible] = useState(true);
+
+  // Le rendu serveur est toujours `null` (pas de `window` pour connaître la
+  // préférence de mouvement). Côté client, framer-motion résout cette
+  // préférence dès le tout premier rendu -> sans ce garde-fou, le premier
+  // rendu client ne correspond jamais au HTML serveur (erreur d'hydratation
+  // React, qui régénère alors tout l'arbre et peut effacer au passage des
+  // attributs posés ailleurs par script inline, comme le thème clair/sombre).
+  const mounted = useHasMounted();
 
   useIsomorphicLayoutEffect(() => {
     // On ne sait pas encore si l'utilisateur préfère moins d'animations
@@ -35,9 +70,11 @@ export default function PageIntro() {
     return () => clearTimeout(timer);
   }, [prefersReducedMotion]);
 
-  // Tant qu'on ignore la préférence de mouvement, on ne rend rien plutôt
-  // que de risquer d'afficher puis retirer l'écran en un seul frame.
-  if (prefersReducedMotion === null) return null;
+  // Tant qu'on n'est pas monté côté client (= rendu identique au serveur)
+  // ou qu'on ignore la préférence de mouvement, on ne rend rien plutôt
+  // que de risquer un écart d'hydratation ou d'afficher puis retirer
+  // l'écran en un seul frame.
+  if (!mounted || prefersReducedMotion === null) return null;
 
   return (
     <AnimatePresence>

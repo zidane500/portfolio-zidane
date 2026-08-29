@@ -99,8 +99,6 @@ export default function Hero() {
           }}
         >
           <h1 className="ref-title">
-            <span className="ref-title__hello">Salut, je suis</span>
-
             <span className="ref-title__name">Zidane Haffar</span>
           </h1>
 

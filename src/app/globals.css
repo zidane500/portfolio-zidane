@@ -82,6 +82,7 @@
   --sidebar-text-faint: rgba(255, 255, 255, 0.26);
   --sidebar-text-muted: rgba(255, 255, 255, 0.48);
   --sidebar-text-hover: rgba(255, 255, 255, 0.9);
+  --sidebar-cv-text: rgba(132, 180, 255, 0.68);
 
   /* ==================================================
      HERO — tokens (Phase 4c), valeurs dark = originales
@@ -126,6 +127,23 @@
   --section-panel-bg-1: rgba(15, 21, 35, 0.88);
   --section-panel-bg-2: rgba(7, 12, 22, 0.9);
 
+  /* Gradient unique à 3 arrêts de .about-section, jamais unifié avec
+     le panneau partagé ci-dessus -> restait figé en sombre quel que
+     soit le thème actif tant qu'il n'était pas piloté par variable. */
+  --about-panel-bg-1: rgba(42, 56, 91, 0.09);
+  --about-panel-bg-2: rgba(10, 15, 26, 0.82);
+  --about-panel-bg-3: rgba(8, 13, 24, 0.9);
+
+  /* .contact-section a elle aussi son propre gradient de base (2 arrêts),
+     jamais unifié avec le panneau partagé -> restait figé en sombre. */
+  --contact-panel-bg-1: rgba(15, 21, 37, 0.96);
+  --contact-panel-bg-2: rgba(7, 12, 23, 0.96);
+
+  /* Champs du formulaire : texte saisi + placeholder, jamais reliés
+     au système de thème (blanc fixe -> invisible sur fond clair). */
+  --contact-input-text: #ffffff;
+  --contact-input-placeholder: rgba(255, 255, 255, 0.28);
+
   /* ==================================================
      PROJECTS / TESTIMONIALS / CONTACT / FOOTER (Phase 4e)
      valeurs dark = originales
@@ -153,6 +171,12 @@
   --footer-link-hover: rgba(255, 255, 255, 0.75);
   --footer-love: rgba(255, 255, 255, 0.3);
   --footer-top: rgba(255, 255, 255, 0.45);
+
+  /* ==================================================
+     SHELL — fond décoratif global (grille, vignette)
+  ================================================== */
+  --shell-vignette: rgba(0, 0, 0, 0.72);
+  --shell-grid-line: rgba(255, 255, 255, 0.022);
 }
 
 /* ====================================================
@@ -177,6 +201,7 @@
   --sidebar-text-faint: rgba(13, 15, 26, 0.35);
   --sidebar-text-muted: rgba(13, 15, 26, 0.55);
   --sidebar-text-hover: rgba(13, 15, 26, 0.92);
+  --sidebar-cv-text: rgba(64, 99, 209, 0.85);
 
   /* Tokens partagés — vérifiés sûrs partout où ils sont utilisés
      (bordures/washes neutres, jamais des glows colorés) */
@@ -184,6 +209,17 @@
   --white-018: rgba(13, 15, 26, 0.035);
   --white-10: rgba(13, 15, 26, 0.12);
   --white-065: rgba(13, 15, 26, 0.12);
+  --white-90: rgba(13, 15, 26, 0.9);
+  --white-100: #0d0f1a;
+  --white-25: rgba(13, 15, 26, 0.22);
+  --white-08: rgba(13, 15, 26, 0.08);
+  --white-07: rgba(13, 15, 26, 0.07);
+  --white-055: rgba(13, 15, 26, 0.055);
+  --white-045: rgba(13, 15, 26, 0.045);
+  --white-04: rgba(13, 15, 26, 0.04);
+  --white-035: rgba(13, 15, 26, 0.035);
+  --white-025: rgba(13, 15, 26, 0.025);
+  --white-02: rgba(13, 15, 26, 0.02);
   --black-17: rgba(15, 23, 42, 0.08);
 
   /* Hero (Phase 4c) */
@@ -220,6 +256,16 @@
   --section-panel-bg-1: rgba(255, 255, 255, 0.85);
   --section-panel-bg-2: rgba(255, 255, 255, 0.75);
 
+  --about-panel-bg-1: rgba(255, 255, 255, 0.9);
+  --about-panel-bg-2: rgba(255, 255, 255, 0.82);
+  --about-panel-bg-3: rgba(255, 255, 255, 0.78);
+
+  --contact-panel-bg-1: rgba(255, 255, 255, 0.88);
+  --contact-panel-bg-2: rgba(255, 255, 255, 0.8);
+
+  --contact-input-text: rgba(13, 15, 26, 0.88);
+  --contact-input-placeholder: rgba(13, 15, 26, 0.35);
+
   /* Projects / Testimonials / Contact / Footer (Phase 4e) */
   --text-hover-strong: rgba(13, 15, 26, 0.92);
 
@@ -244,6 +290,13 @@
   --footer-link-hover: rgba(13, 15, 26, 0.82);
   --footer-love: rgba(13, 15, 26, 0.42);
   --footer-top: rgba(13, 15, 26, 0.58);
+
+  /* Shell — beaucoup plus discret : la vignette sombre "spotlight" du
+     mode sombre deviendrait un cadre grisâtre disgracieux sur fond
+     clair, et les lignes de grille passent en foncé (à peine visible,
+     même logique que sur fond sombre). */
+  --shell-vignette: rgba(15, 23, 42, 0.05);
+  --shell-grid-line: rgba(13, 15, 26, 0.028);
 }
 
 * {
@@ -335,7 +388,7 @@ a {
       rgba(59, 130, 246, 0.035),
       transparent 42%
     ),
-    #05070c;
+    var(--background);
 }
 
 /* Futuristic grid */
@@ -348,8 +401,8 @@ a {
   pointer-events: none;
 
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+    linear-gradient(var(--shell-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--shell-grid-line) 1px, transparent 1px);
 
   background-size: 72px 72px;
 
@@ -370,7 +423,7 @@ a {
   z-index: 20;
   pointer-events: none;
 
-  box-shadow: inset 0 0 180px rgba(0, 0, 0, 0.72);
+  box-shadow: inset 0 0 180px var(--shell-vignette);
 }
 
 /* ======================================================
@@ -521,7 +574,7 @@ a {
 }
 
 .sidebar-logo__letter {
-  color: #f5f7ff;
+  color: var(--foreground);
 
   font-style: italic;
 
@@ -987,7 +1040,7 @@ a {
 
   background: rgba(50, 70, 125, 0.07);
 
-  color: rgba(132, 180, 255, 0.68);
+  color: var(--sidebar-cv-text);
 
   font-size: 7px;
 
@@ -1207,7 +1260,7 @@ a {
 
   margin-bottom: 6px;
 
-  color: #f3f4ff;
+  color: var(--foreground);
 
   font-size: clamp(32px, 3.2vw, 52px);
   font-weight: 720;
@@ -1495,7 +1548,7 @@ a {
 
   box-shadow:
     0 16px 35px rgba(0, 0, 0, 0.4),
-    inset 0 1px var(--white-08);
+    inset 0 1px rgba(255, 255, 255, 0.08);
 }
 
 .ref-tech--react {
@@ -1555,7 +1608,7 @@ a {
   box-shadow:
     0 35px 80px rgba(0, 0, 0, 0.48),
     0 0 50px rgba(84, 62, 255, 0.12),
-    inset 0 1px var(--white-08);
+    inset 0 1px rgba(255, 255, 255, 0.08);
 }
 
 .ref-device__screen::after {
@@ -1567,7 +1620,7 @@ a {
   background: linear-gradient(
     110deg,
     transparent 30%,
-    var(--white-035) 48%,
+    rgba(255, 255, 255, 0.035) 48%,
     transparent 65%
   );
 
@@ -1582,7 +1635,7 @@ a {
 
   padding: 0 12px;
 
-  border-bottom: 1px solid var(--white-055);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.055);
 
   color: rgba(255, 255, 255, 0.24);
 
@@ -2164,9 +2217,9 @@ a {
 
   background: linear-gradient(
     115deg,
-    rgba(42, 56, 91, 0.09),
-    rgba(10, 15, 26, 0.82) 39%,
-    rgba(8, 13, 24, 0.9)
+    var(--about-panel-bg-1),
+    var(--about-panel-bg-2) 39%,
+    var(--about-panel-bg-3)
   );
 
   box-shadow:
@@ -3906,7 +3959,7 @@ a {
 
   padding: 10px;
 
-  background: var(--white-02);
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .project-dashboard__sidebar span {
@@ -4757,7 +4810,7 @@ a {
 
   background: radial-gradient(
     circle,
-    var(--white-100) 0%,
+    #ffffff 0%,
     #8de2ff 35%,
     #7d72ff 70%,
     #b667ff 100%
@@ -5393,7 +5446,7 @@ a {
     transparent 0deg,
     transparent 332deg,
     var(--orbit-a) 344deg,
-    var(--white-100) 350deg,
+    #ffffff 350deg,
     var(--orbit-b) 356deg,
     transparent 360deg
   );
@@ -5731,7 +5784,11 @@ a {
       rgba(84, 67, 255, 0.13),
       transparent 34%
     ),
-    linear-gradient(135deg, rgba(15, 21, 37, 0.96), rgba(7, 12, 23, 0.96));
+    linear-gradient(
+      135deg,
+      var(--contact-panel-bg-1),
+      var(--contact-panel-bg-2)
+    );
 
   box-shadow:
     0 25px 65px rgba(0, 0, 0, 0.24),
@@ -5778,7 +5835,7 @@ a {
    * champ message se retrouvait affiché à côté des deux autres
    * au lieu d'être empilé en dessous.
    */
-  .contact-form__field:nth-child(3) {
+  .contact-form__field--message {
     grid-column: 1 !important;
     grid-row: auto !important;
   }
@@ -6656,7 +6713,7 @@ a.contact-info-item:hover {
 
   border-radius: 8px;
 
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--sidebar-text-muted);
 
   font-size: 16px;
 
@@ -6667,7 +6724,7 @@ a.contact-info-item:hover {
 }
 
 .ref-socials a:hover {
-  color: white;
+  color: var(--text-hover-strong);
 
   transform: translateY(-2px);
 
@@ -6761,7 +6818,7 @@ a.contact-info-item:hover {
   padding: 10px 18px;
   font-size: 14px;
   gap: 8px;
-  color: white;
+  color: var(--foreground);
 }
 
 /* Agrandir le point vert "Disponible" */
@@ -6964,6 +7021,7 @@ a.contact-info-item:hover {
   position: absolute;
   left: 60%;
   bottom: 50%;
+  color: #ff7a5c;
 }
 /* ======================================================
    PROJECTS — REAL PROJECT VISUALS
@@ -7522,15 +7580,15 @@ a.contact-info-item:hover {
   gap: 12px;
 }
 
-.contact-form__field:first-child {
+.contact-form__field--name {
   grid-column: 1;
 }
 
-.contact-form__field:nth-child(2) {
+.contact-form__field--email {
   grid-column: 1;
 }
 
-.contact-form__field:nth-child(3) {
+.contact-form__field--message {
   grid-column: 2;
   grid-row: 1 / span 2;
 }
@@ -7558,7 +7616,7 @@ a.contact-info-item:hover {
 
   background: rgba(255, 255, 255, 0.025);
 
-  color: var(--white-100);
+  color: var(--contact-input-text);
 
   outline: none;
 
@@ -7587,7 +7645,7 @@ a.contact-info-item:hover {
 
 .contact-form__field input::placeholder,
 .contact-form__field textarea::placeholder {
-  color: rgba(255, 255, 255, 0.28);
+  color: var(--contact-input-placeholder);
 }
 
 .contact-form__field input:focus,

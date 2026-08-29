@@ -401,7 +401,7 @@ export default function Sidebar() {
             </span>
 
             <div>
-              <small>Disponible pour</small>
+              <strong>Disponible pour</strong>
 
               <strong>Nouvelles opportunités</strong>
             </div>

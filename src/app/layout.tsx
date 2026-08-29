@@ -51,7 +51,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className={`${spaceGrotesk.variable} ${inter.variable}`}>
+    <html
+      lang="fr"
+      className={`${spaceGrotesk.variable} ${inter.variable}`}
+      suppressHydrationWarning
+    >
       <body>
         <Script
           id="theme-init"
