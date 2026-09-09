@@ -16,37 +16,32 @@ const qualities = [
   {
     icon: Code2,
     label: "Développement Full Stack",
-    description: "Du frontend au backend, avec une vision complète.",
+
     className: "about-chip--blue",
   },
   {
     icon: MonitorSmartphone,
     label: "React & Next.js",
-    description: "Interfaces web modernes et responsives.",
     className: "about-chip--green",
   },
   {
     icon: ServerCog,
     label: "Laravel & REST API",
-    description: "Backends structurés et APIs métier.",
     className: "about-chip--orange",
   },
   {
     icon: Database,
     label: "PostgreSQL & MySQL",
-    description: "Conception et gestion des données.",
     className: "about-chip--purple",
   },
   {
     icon: Smartphone,
     label: "Mobile & Desktop",
-    description: "Android, Java et applications Electron.",
     className: "about-chip--orange",
   },
   {
     icon: Boxes,
     label: "ERP & Solutions Métier",
-    description: "Stock, facturation et processus d'entreprise.",
     className: "about-chip--violet",
   },
 ];
@@ -110,7 +105,7 @@ export default function About() {
           l&apos;entreprise.
         </p>
 
-        <p className="about-text">
+        <p className="about-intro about-text-spacing">
           J&apos;aime transformer des besoins concrets en solutions fiables,
           simples à utiliser et maintenables, qu&apos;il s&apos;agisse
           d&apos;applications web, mobiles ou d&apos;outils de gestion.
@@ -146,7 +141,6 @@ export default function About() {
 
                 <span className="about-chip__copy">
                   <strong>{quality.label}</strong>
-                  <small>{quality.description}</small>
                 </span>
               </motion.div>
             );
