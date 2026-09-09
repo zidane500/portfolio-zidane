@@ -93,6 +93,7 @@ export default function Experience() {
 
   const beamX = useTransform(progress, [0, 1], ["6%", "94%"]);
   const beamOpacity = useTransform(progress, [0, 0.03, 0.97, 1], [0, 1, 1, 0]);
+  const beamY = useTransform(progress, [0, 1], ["6%", "94%"]);
 
   return (
     <motion.section
@@ -152,6 +153,31 @@ export default function Experience() {
           aria-hidden="true"
           style={{
             left: beamX,
+            opacity: beamOpacity,
+          }}
+        >
+          <span className="experience-timeline__beamCore" />
+          <span className="experience-timeline__beamHalo" />
+        </motion.div>
+
+        {/* TIMELINE MOBILE VERTICALE */}
+
+        <div className="experience-timeline__mobileRail" aria-hidden="true" />
+
+        <motion.div
+          className="experience-timeline__mobileProgress"
+          aria-hidden="true"
+          style={{
+            scaleY: progress,
+            transformOrigin: "center top",
+          }}
+        />
+
+        <motion.div
+          className="experience-timeline__mobileBeam"
+          aria-hidden="true"
+          style={{
+            top: beamY,
             opacity: beamOpacity,
           }}
         >
