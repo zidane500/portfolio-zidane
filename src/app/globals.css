@@ -2784,14 +2784,6 @@ a {
   .about-chip {
     min-height: 44px !important;
   }
-
-  .about-chip strong {
-    font-size: 7px !important;
-  }
-
-  .about-chip small {
-    font-size: 6px !important;
-  }
 }
 /* ======================================================
    ABOUT — FINAL REFERENCE TUNING
@@ -7661,7 +7653,7 @@ a.contact-info-item:hover {
 
 .contact-form__submit {
   position: relative;
-  top: -39px;
+  top: -1px;
   min-height: 43px;
 
   display: inline-flex;
