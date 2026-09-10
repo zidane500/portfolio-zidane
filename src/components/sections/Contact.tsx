@@ -188,7 +188,7 @@ export default function Contact() {
           {/* EMAIL */}
 
           <div className="contact-form__field contact-form__field--email">
-            <label htmlFor="contact-email">Votre e-mail</label>
+            <label htmlFor="contact-email">E-mail</label>
 
             <input
               id="contact-email"
@@ -204,7 +204,7 @@ export default function Contact() {
           {/* MESSAGE */}
 
           <div className="contact-form__field contact-form__field--message">
-            <label htmlFor="contact-message">Votre message</label>
+            <label htmlFor="contact-message">Message</label>
 
             <textarea
               id="contact-message"
